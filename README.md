@@ -50,3 +50,4 @@ Ps:如果是 uni 出现问题，请具体描述是运行那个端小程序/andro
 - 运行 app 项目 ios 需要安装 xcode，安卓需要装安卓的 sdk 以及安卓模拟器，建议安卓安装 genymotion https://www.genymotion.com/ 登录时可选择私人使用，勾选后无需付费
 
 
+wo 
