@@ -434,7 +434,73 @@
       "style": {
         "navigationBarTitleText": "直播列表"
       }
-    }
+    },
+	{
+	  "path": "pages/systemsetting/index",
+	  "style": {
+	    "navigationBarTitleText": "系统设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/temperature",
+	  "style": {
+	    "navigationBarTitleText": "体温测量设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/hartrate",
+	  "style": {
+	    "navigationBarTitleText": "心率上传设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/contacts",
+	  "style": {
+	    "navigationBarTitleText": "通讯录设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/sos",
+	  "style": {
+	    "navigationBarTitleText": "SOS设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/sleep",
+	  "style": {
+	    "navigationBarTitleText": "睡眠设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/maprecord",
+	  "style": {
+	    "navigationBarTitleText": "查看足迹"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/geography",
+	  "style": {
+	    "navigationBarTitleText": "电子围栏"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/geographylist",
+	  "style": {
+	    "navigationBarTitleText": "电子围栏列表"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/tumble/tumblelist",
+	  "style": {
+	    "navigationBarTitleText": "跌倒报警器列表"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/tumble/tumble",
+	  "style": {
+	    "navigationBarTitleText": "跌倒报警器设置"
+	  }
+	}
     ],
   "easycom": {
     "autoscan": true,
@@ -459,12 +525,12 @@
     "iconWidth": "24px",
     "spacing": "3px",
     "list": [
-      {
-        "pagePath": "pages/home/index",
-        "iconPath": "static/icon-home.png",
-        "selectedIconPath": "static/icon-home-hot.png",
-        "text": "首页"
-      },
+      // {
+      //   "pagePath": "pages/home/index",
+      //   "iconPath": "static/icon-home.png",
+      //   "selectedIconPath": "static/icon-home-hot.png",
+      //   "text": "首页"
+      // },
 	  {
 	    "pagePath": "pages/home/index",
 	    "iconPath": "static/icon-home.png",

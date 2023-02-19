@@ -10,6 +10,14 @@ import cuCustom from '@/components/colorui/components/cu-custom.vue'
 
 import { parseRoute, _router, parseQuery } from '@/utils'
 import { VUE_APP_RESOURCES_URL, VUE_APP_API_URL } from '@/config'
+
+
+// 引入全部组件
+import Mint from 'mint-ui';
+//css放在App.vue中引入，在这里引入会在打正式包的时候报错
+//import 'mint-ui/lib/style.css'
+Vue.use(Mint);
+
 Vue.component('cu-custom', cuCustom)
 Vue.config.productionTip = false
 Vue.config.devtools = process.env.NODE_ENV !== 'production'

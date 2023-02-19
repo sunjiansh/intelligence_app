@@ -16,11 +16,13 @@
     "flyio": "^0.6.14",
     "jweixin-module": "^1.6.0",
     "miniapp-color-thief": "^1.0.5",
+    "mint-ui": "^2.2.13",
     "vconsole": "^3.3.4",
     "wechat-jssdk": "^5.0.4"
   },
   "devDependencies": {
     "@types/html5plus": "^1.0.1",
-    "@types/uni-app": "^1.4.3"
+    "@types/uni-app": "^1.4.3",
+    "babel-plugin-component": "^1.1.1"
   }
 }

@@ -113,12 +113,21 @@
                 <text class="iconfont icon-jiantou"></text>
               </view>
             </template>
+			
+			<view class="item" @click="goPageByPath('/pages/systemsetting/index')">
+			  <view class="pictrue">
+			   
+			  </view>
+			  <view class="cell">系统设置</view>
+			  <text class="iconfont icon-jiantou"></text>
+			</view>
+			
           </view>
         </view>
       </view>
       <view class="by">
         <view>
-          <text class="by-text">www.yixiang.co提供技术支持</text>
+          <text class="by-text">www.xx.co提供技术支持</text>
         </view>
       </view>
       <!-- <SwitchWindow
@@ -345,6 +354,11 @@ export default {
           console.log(error)
         })
     },
+	goPageByPath(path){
+		this.$yrouter.push({
+		  path: path,
+		})
+	},
     goPages(index) {
       let url = this.MyMenus[index].uniapp_url
       if (url === '/pages/user/promotion/UserPromotion/index' && this.userInfo.statu === 1) {
