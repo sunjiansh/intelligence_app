@@ -114,13 +114,13 @@
               </view>
             </template>
 			
-			<view class="item" @click="goPageByPath('/pages/systemsetting/index')">
+			<!-- <view class="item" @click="goPageByPath('/pages/systemsetting/index')">
 			  <view class="pictrue">
 			   
 			  </view>
 			  <view class="cell">系统设置</view>
 			  <text class="iconfont icon-jiantou"></text>
-			</view>
+			</view> -->
 			
           </view>
         </view>

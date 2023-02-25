@@ -3,15 +3,15 @@
 		<view class="item">
 			<view class="address">
 				<view class="consignee">
-				安装高度：
-					<text style="float: right;">{{form.height}}厘米</text>
+				定位时间间隔：
+					<text style="float: right;">{{form.location / 60}}分钟</text>
 				</view>
 				<view>
 					<mt-range
-					  v-model="form.height"
-					  :min="200"
-					  :max="300"
-					  :step="5"
+					  v-model="form.location"
+					  :min="300"
+					  :max="6000"
+					  :step="30"
 					  :bar-height="5"
 					  >
 					</mt-range>
@@ -19,7 +19,7 @@
 			</view>
 			<view class="operation acea-row row-between-wrapper">
 				<view class="acea-row row-middle">
-					可设置范围：200-300 厘米
+					可设置范围：{{300/60}} - {{6000/60}} 分钟
 				</view>
 			</view>
 		</view>
@@ -29,7 +29,7 @@
 	  
 		<view class="footer acea-row row-between-wrapper">
 			<mt-button type="default" style="width:50%"  @click.native="goBack()" >取消</mt-button>
-			<mt-button type="primary" @click.native="editDTumble" style="width:50%">保存</mt-button>
+			<mt-button type="primary" @click.native="configLocation" style="width:50%">保存</mt-button>
 		</view>
 	
 	</view>
@@ -38,25 +38,24 @@
 <script>
 	
 	import { getUserInfo} from '@/api/user'
-	import{editDTumble,getDTumbleById} from "@/api/systemsetting.js"
+	import{configLocation,getDWatchById} from "@/api/systemsetting.js"
 	import { Toast,Range } from 'mint-ui';
 
 	
 	export default {
 		data() {
 			return {
-				h:100,
 				form:{
 					id:null,
 					imei:null,
-					height:null
+					location:null
 				}
 			}
 		},
 		mounted() {
 			 let id = this.$yroute.query.id
 			 if(id){
-				 getDTumbleById(id).then(res => {
+				 getDWatchById(id).then(res => {
 					this.form = res.data
 				}).catch(err => {
 					console.log(err);
@@ -72,9 +71,9 @@
 			    //that.phone = that.yphone.replace(reg, '$1****$2')
 			  })
 			},
-			editDTumble(){
+			configLocation(){
 				//update
-				editDTumble(this.form).then(res => {
+				configLocation(this.form).then(res => {
 					Toast({message: '修改成功',iconClass: 'icon icon-success'});
 					//this.$router.back()
 					setTimeout(() => this.$router.back(), 300);

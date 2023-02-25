@@ -38,7 +38,8 @@ export default {
     }
     if (this.$deviceType == 'app' || this.$deviceType == 'weixinh5') {
       this.$yrouter.switchTab({
-        path: '/pages/home/index',
+        //path: '/pages/home/index',
+		 path: '/pages/health/index',
       })
       return
     }
@@ -51,7 +52,8 @@ export default {
     console.log('进行登录操作')
     login().finally(() => {
       this.$yrouter.switchTab({
-        path: '/pages/home/index',
+        // path: '/pages/home/index',
+		 path: '/pages/health/index',
       })
     })
   },
@@ -73,7 +75,8 @@ export default {
         })
       } else {
         this.$yrouter.switchTab({
-          path: '/pages/home/index',
+          //path: '/pages/home/index',
+		   path: '/pages/health/index',
         })
       }
     },

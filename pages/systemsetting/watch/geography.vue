@@ -18,7 +18,10 @@
 		<view id="map" style="height: 400px;">
 		
 		</view>
-		<view>
+		
+		<view style="height:100rpx;"></view>
+		
+		<view class="footer acea-row row-between-wrapper">
 			<mt-button type="default" style="width:50%">取消</mt-button>
 			<mt-button type="primary" @click.native="save" style="width:50%">保存</mt-button>
 		</view>

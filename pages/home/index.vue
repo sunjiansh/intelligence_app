@@ -53,7 +53,7 @@
 			//Indicator.open();
 			//alert(mui)
 			
-			this.$refs.picker.open();
+			//this.$refs.picker.open();
 			
 		}
 	}

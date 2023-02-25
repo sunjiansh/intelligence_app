@@ -6,6 +6,30 @@
         "navigationBarTitleText": "康泰中芯"
       }
     },
+	{
+	  "path": "pages/health/index",
+	  "style": {
+	    "navigationBarTitleText": "健康"
+	  }
+	},
+	{
+	  "path": "pages/friends/index",
+	  "style": {
+	    "navigationBarTitleText": "好友"
+	  }
+	},
+	{
+	  "path": "pages/friends/add",
+	  "style": {
+	    "navigationBarTitleText": "添加好友"
+	  }
+	},
+	{
+	  "path": "pages/device/index",
+	  "style": {
+	    "navigationBarTitleText": "设备"
+	  }
+	},
     {
       "path": "pages/authorization/index",
       "style": {
@@ -442,6 +466,12 @@
 	  }
 	},
 	{
+	  "path": "pages/systemsetting/watch/temperaturelist",
+	  "style": {
+	    "navigationBarTitleText": "体温测量设置"
+	  }
+	},
+	{
 	  "path": "pages/systemsetting/watch/temperature",
 	  "style": {
 	    "navigationBarTitleText": "体温测量设置"
@@ -454,7 +484,19 @@
 	  }
 	},
 	{
+	  "path": "pages/systemsetting/watch/hartratelist",
+	  "style": {
+	    "navigationBarTitleText": "心率上传设置"
+	  }
+	},
+	{
 	  "path": "pages/systemsetting/watch/contacts",
+	  "style": {
+	    "navigationBarTitleText": "通讯录设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/contactslist",
 	  "style": {
 	    "navigationBarTitleText": "通讯录设置"
 	  }
@@ -466,7 +508,31 @@
 	  }
 	},
 	{
+	  "path": "pages/systemsetting/watch/soslist",
+	  "style": {
+	    "navigationBarTitleText": "SOS设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/location",
+	  "style": {
+	    "navigationBarTitleText": "定位设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/locationlist",
+	  "style": {
+	    "navigationBarTitleText": "定位设置"
+	  }
+	},
+	{
 	  "path": "pages/systemsetting/watch/sleep",
+	  "style": {
+	    "navigationBarTitleText": "睡眠设置"
+	  }
+	},
+	{
+	  "path": "pages/systemsetting/watch/sleeplist",
 	  "style": {
 	    "navigationBarTitleText": "睡眠设置"
 	  }
@@ -525,30 +591,42 @@
     "iconWidth": "24px",
     "spacing": "3px",
     "list": [
-      // {
-      //   "pagePath": "pages/home/index",
-      //   "iconPath": "static/icon-home.png",
-      //   "selectedIconPath": "static/icon-home-hot.png",
-      //   "text": "首页"
-      // },
+      {
+        "pagePath": "pages/health/index",
+        "iconPath": "static/icon-home.png",
+        "selectedIconPath": "static/icon-home-hot.png",
+        "text": "健康"
+      },
 	  {
-	    "pagePath": "pages/home/index",
+	    "pagePath": "pages/friends/index",
 	    "iconPath": "static/icon-home.png",
 	    "selectedIconPath": "static/icon-home-hot.png",
-	    "text": "商城首页"
+	    "text": "好友"
 	  },
-      {
-        "pagePath": "pages/shop/GoodsClass/index",
-        "iconPath": "static/icon-class.png",
-        "selectedIconPath": "static/icon-class-hot.png",
-        "text": "分类"
-      },
-      {
-        "pagePath": "pages/shop/ShoppingCart/index",
-        "iconPath": "static/icon-cart.png",
-        "selectedIconPath": "static/icon-cart-hot.png",
-        "text": "购物车"
-      },
+	  {
+	    "pagePath": "pages/device/index",
+	    "iconPath": "static/icon-home.png",
+	    "selectedIconPath": "static/icon-home-hot.png",
+	    "text": "设备"
+	  },
+	  // {
+	  //   "pagePath": "pages/home/index",
+	  //   "iconPath": "static/icon-home.png",
+	  //   "selectedIconPath": "static/icon-home-hot.png",
+	  //   "text": "商城首页"
+	  // },
+   //    {
+   //      "pagePath": "pages/shop/GoodsClass/index",
+   //      "iconPath": "static/icon-class.png",
+   //      "selectedIconPath": "static/icon-class-hot.png",
+   //      "text": "分类"
+   //    },
+   //    {
+   //      "pagePath": "pages/shop/ShoppingCart/index",
+   //      "iconPath": "static/icon-cart.png",
+   //      "selectedIconPath": "static/icon-cart-hot.png",
+   //      "text": "购物车"
+   //    },
       {
         "pagePath": "pages/user/User/index",
         "iconPath": "static/icon-user.png",
