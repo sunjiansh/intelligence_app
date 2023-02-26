@@ -1,6 +1,6 @@
 <template>
 	<view class="address-management" ref="container">
-		<mt-loadmore :top-method="loadTop"  ref="loadmore" style="height: 400px;"> 
+		<mt-loadmore :top-method="loadTop"  ref="loadmore"> 
 			<view class="item" v-for="(item, index) in list" >
 				<view class="address">
 					<view class="consignee">
@@ -90,12 +90,22 @@
 				}).catch(err => {
 					console.log(err);
 				})
+				uni.stopPullDownRefresh();
 			},
 			loadTop() {
 				this.queryList()
 			},
 			goBack(){
 				setTimeout(() => this.$router.back(), 300);
+			},
+			onLoad: function (options) {
+				// setTimeout(function () {
+				// 	console.log('start pulldown');
+				// }, 1000);
+				//uni.startPullDownRefresh();
+			},
+			onPullDownRefresh() {
+				this.queryList()
 			}
 		}
 	}

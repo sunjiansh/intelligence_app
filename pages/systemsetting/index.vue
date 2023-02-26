@@ -23,7 +23,6 @@
 		},
 		methods: {
 			goPageByPath(path){
-				
 				this.$yrouter.push({
 				  path: path,
 				})

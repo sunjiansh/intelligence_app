@@ -85,6 +85,7 @@
 				}).catch(err => {
 					console.log(err);
 				})
+				uni.stopPullDownRefresh();
 			},
 			loadTop() {
 				this.queryList()
@@ -110,6 +111,15 @@
 				  	console.log(err);
 				  })
 				});
+			},
+			onLoad: function (options) {
+				// setTimeout(function () {
+				// 	console.log('start pulldown');
+				// }, 1000);
+				//uni.startPullDownRefresh();
+			},
+			onPullDownRefresh() {
+				this.queryList()
 			}
 		}
 	}

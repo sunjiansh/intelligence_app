@@ -15,7 +15,8 @@
 	{
 	  "path": "pages/friends/index",
 	  "style": {
-	    "navigationBarTitleText": "好友"
+	    "navigationBarTitleText": "好友",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
@@ -468,7 +469,8 @@
 	{
 	  "path": "pages/systemsetting/watch/temperaturelist",
 	  "style": {
-	    "navigationBarTitleText": "体温测量设置"
+	    "navigationBarTitleText": "体温测量设置",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
@@ -486,7 +488,8 @@
 	{
 	  "path": "pages/systemsetting/watch/hartratelist",
 	  "style": {
-	    "navigationBarTitleText": "心率上传设置"
+	    "navigationBarTitleText": "心率上传设置",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
@@ -498,7 +501,8 @@
 	{
 	  "path": "pages/systemsetting/watch/contactslist",
 	  "style": {
-	    "navigationBarTitleText": "通讯录设置"
+	    "navigationBarTitleText": "通讯录设置",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
@@ -510,7 +514,8 @@
 	{
 	  "path": "pages/systemsetting/watch/soslist",
 	  "style": {
-	    "navigationBarTitleText": "SOS设置"
+	    "navigationBarTitleText": "SOS设置",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
@@ -522,7 +527,8 @@
 	{
 	  "path": "pages/systemsetting/watch/locationlist",
 	  "style": {
-	    "navigationBarTitleText": "定位设置"
+	    "navigationBarTitleText": "定位设置",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
@@ -534,31 +540,36 @@
 	{
 	  "path": "pages/systemsetting/watch/sleeplist",
 	  "style": {
-	    "navigationBarTitleText": "睡眠设置"
+	    "navigationBarTitleText": "睡眠设置",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
 	  "path": "pages/systemsetting/watch/maprecord",
 	  "style": {
-	    "navigationBarTitleText": "查看足迹"
+	    "navigationBarTitleText": "查看足迹",
+		"enablePullDownRefresh": false
 	  }
 	},
 	{
 	  "path": "pages/systemsetting/watch/geography",
 	  "style": {
-	    "navigationBarTitleText": "电子围栏"
+	    "navigationBarTitleText": "电子围栏",
+		"enablePullDownRefresh": false
 	  }
 	},
 	{
 	  "path": "pages/systemsetting/watch/geographylist",
 	  "style": {
-	    "navigationBarTitleText": "电子围栏列表"
+	    "navigationBarTitleText": "电子围栏列表",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
 	  "path": "pages/systemsetting/tumble/tumblelist",
 	  "style": {
-	    "navigationBarTitleText": "跌倒报警器列表"
+	    "navigationBarTitleText": "跌倒报警器列表",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
@@ -566,6 +577,69 @@
 	  "style": {
 	    "navigationBarTitleText": "跌倒报警器设置"
 	  }
+	},
+	{
+		"path" : "pages/health/boldpressurecurve",
+		"style" :                                                                                    
+		{
+			"navigationBarTitleText": "血压统计图",
+			"enablePullDownRefresh": false
+		}
+		
+	},
+	{
+		"path" : "pages/health/heartratecurve",
+		"style" :                                                                                    
+		{
+			"navigationBarTitleText": "心率统计图",
+			"enablePullDownRefresh": false
+		}
+		
+	}
+	,{
+		"path" : "pages/health/boldoxygeon",
+		"style" :                                                                                    
+		{
+			"navigationBarTitleText": "血氧统计图",
+			"enablePullDownRefresh": false
+		}
+		
+	}
+	,{
+		"path" : "pages/health/sleepcurve",
+		"style" :                                                                                    
+		{
+			"navigationBarTitleText": "睡眠统计图",
+			"enablePullDownRefresh": false
+		}
+		
+	}
+	,{
+		"path" : "pages/health/temperaturecurve",
+		"style" :                                                                                    
+		{
+			"navigationBarTitleText": "体温统计图",
+			"enablePullDownRefresh": false
+		}
+		
+	}
+	,{
+		"path" : "pages/health/weightcurve",
+		"style" :                                                                                    
+		{
+			"navigationBarTitleText": "体重统计图",
+			"enablePullDownRefresh": false
+		}
+		
+	}
+	,{
+		"path" : "pages/health/ecgcurve",
+		"style" :                                                                                    
+		{
+			"navigationBarTitleText": "心电统计图",
+			"enablePullDownRefresh": false
+		}
+		
 	}
     ],
   "easycom": {

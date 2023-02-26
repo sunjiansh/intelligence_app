@@ -1,6 +1,6 @@
 <template>
 	<view>
-		电子围栏设置
+		血压统计图{{uid}}
 	</view>
 </template>
 
@@ -8,11 +8,18 @@
 	export default {
 		data() {
 			return {
+				uid:null
 				
 			}
 		},
 		methods: {
 			
+		},
+		created() {
+			
+		},
+		 mounted: function() {
+			this.uid = this.$yroute.query.id
 		}
 	}
 </script>

@@ -54,7 +54,7 @@
 					lat:null,
 					lon:null,
 					address:null,
-					regionRange:null,
+					regionRange:500,
 				}
 			}
 		},
