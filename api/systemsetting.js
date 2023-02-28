@@ -225,3 +225,39 @@ export function getOxygenByDay(dateObj,uid) {
 	  login: true
   })
 }
+
+
+
+export function getTemperatureByDay(dateObj,uid) {
+  return request.get('/health/getTemperatureByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
+
+
+export function getWeightByDay(dateObj,uid) {
+  return request.get('/health/getWeightByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
+
+
+export function getBloodByDay(dateObj,uid) {
+  return request.get('/health/getBloodByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
+
+export function getEcgByDay(dateObj,uid) {
+  return request.get('/health/getEcgByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}

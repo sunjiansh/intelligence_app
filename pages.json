@@ -641,6 +641,15 @@
 		}
 		
 	}
+        ,{
+            "path" : "pages/health/bloodcurve",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "血糖统计图",
+                "enablePullDownRefresh": true
+            }
+            
+        }
     ],
   "easycom": {
     "autoscan": true,

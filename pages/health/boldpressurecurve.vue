@@ -19,7 +19,7 @@
 				</view>
 				<view class="address">
 					<view class="consignee">
-						<view id="main" class="echarts" style="height: 200px;width: 100%;"></view>
+						<view id="main" class="echarts" style="height: 250px;width: 100%;"></view>
 					</view>
 				</view>
 		    </view>
@@ -100,7 +100,13 @@
 					}
 				}
 				this.option ={
-					  legend: {},
+					  legend: {
+						  
+					  },
+					  grid: {
+						right: '5%',
+						height:150
+					  },
 					  xAxis: {
 						type: 'category',
 						boundaryGap: false,
@@ -119,12 +125,22 @@
 						  type: 'line',
 						  //data: [10, 11, 13, 11, 12, 12, 9],
 						  data: sbpArr,
+						  markPoint: {
+							  data: [
+								{ type: 'max', name: '最大' },
+							  ]
+							}
 						},
 						{
 						  name: '舒张压',
 						  type: 'line',
 						  //data: [1, -2, 2, 5, 3, 2, 0],
 						   data: dbpArr,
+						   markPoint: {
+							  data: [
+								{ type: 'min', name: '最小' },
+							  ]
+							}
 						}
 					  ]
 					};

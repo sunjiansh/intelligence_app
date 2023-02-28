@@ -19,7 +19,7 @@
 				</view>
 				<view class="address">
 					<view class="consignee">
-						<view id="main" class="echarts" style="height: 200px;width: 100%;"></view>
+						<view id="main" class="echarts" style="height: 250px;width: 100%;"></view>
 					</view>
 				</view>
 		    </view>
@@ -89,29 +89,32 @@
 			renderData(res){
 				let xArr = []
 				let yArr = []
+				let average = 0;
 				if(res!=null){
 					for(let i=0;i<res.length;i++){
 						let data = res[i]
 						xArr[i] = data.hourMinutes
 						yArr[i] = data.oxygen
+						average += data.oxygen
 					}
 				}
+				let x = (average/res.length).toFixed(0);
 				
 				this.option =	{
-					 //  title: {
-						// text: 'Beijing AQI',
-						// left: '1%'
-					 //  },
+					  title: {
+						text: x+"%(平均)",
+						left: '1%'
+					  },
 					  grid: {
-						left: '5%',
-						right: '15%',
-						bottom: '10%'
+						right: '10%',
+						height:150
 					  },
 					  xAxis: {
 						data: xArr
 					  },
 					  yAxis: {
-						  
+						  min:70,
+						  max:100,
 					  },
 					  visualMap: {
 						top: 0,
@@ -119,7 +122,7 @@
 						pieces: [
 						  {
 							gt: 0,
-							lte: 94,
+							lte: 95,
 							color: '#93CE07'
 						  },
 						  {
@@ -142,8 +145,14 @@
 							color: '#333'
 						  },
 						  data: [
+							  {
+								yAxis: 80
+							  },
+							  {
+								yAxis: 90
+							  },
 							{
-							  yAxis: 94
+							  yAxis: 95
 							},
 							{
 							  yAxis: 100

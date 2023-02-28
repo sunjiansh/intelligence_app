@@ -22,7 +22,8 @@
 				</view>
 				<view class="address">
 					<view class="consignee">
-						<view id="main" class="echarts" style="height: 200px;width: 100%;"></view>
+						<view>{{sleepDown}} - {{sleepUp}}</view>
+						<view id="main" class="echarts" style="height: 250px;width: 100%;"></view>
 					</view>
 				</view>
 		    </view>
@@ -89,7 +90,9 @@
 				dateStr:'',
 				dateObj:new Date(),
 				allSleepTimeStr:'',
-				articleList:[]
+				articleList:[],
+				sleepDown:'',
+				sleepUp:''
 			}
 		},
 		methods: {
@@ -193,7 +196,8 @@
 					}
 				  },
 				  grid: {
-				    height: 100,
+				    height: 150,
+					right: '5%',
 					left: '15%',
 				  },
 				  legend: {
@@ -281,6 +285,8 @@
 				getSleepDataByDay(this.dateObj,this.uid).then(res => {
 					//console.error(res.data);
 					//alert(res.data.sleepLine);
+					this.sleepDown = res.data.sleepDownTime
+					this.sleepUp = res.data.sleepUpTime
 					
 					if(res.data==null){
 						this.renderData("");

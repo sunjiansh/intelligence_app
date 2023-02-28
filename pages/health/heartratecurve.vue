@@ -19,7 +19,7 @@
 				</view>
 				<view class="address">
 					<view class="consignee">
-						<view id="main" class="echarts" style="height: 200px;width: 100%;"></view>
+						<view id="main" class="echarts" style="height: 250px;width: 100%;"></view>
 					</view>
 				</view>
 		    </view>
@@ -90,15 +90,27 @@
 			renderData(res){
 				let xArr = []
 				let yArr = []
+				let average = 0
 				if(res!=null){
 					for(let i=0;i<res.length;i++){
 						let data = res[i]
 						xArr[i] = data.hourMinutes
 						yArr[i] = data.heartRate
+						average += data.heartRate
 					}
 				}
 				
+				let x = (average/res.length).toFixed(0);
+				
 				this.option ={
+					  title: {
+						text: x+"次/分钟（平均）",
+						left: '1%'
+					  },
+					  grid: {
+						right: '5%',
+						height:150
+					  },
 					  xAxis: {
 						type: 'category',
 						boundaryGap: false,
