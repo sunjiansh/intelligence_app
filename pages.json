@@ -583,7 +583,7 @@
 		"style" :                                                                                    
 		{
 			"navigationBarTitleText": "血压统计图",
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": true
 		}
 		
 	},
@@ -592,7 +592,7 @@
 		"style" :                                                                                    
 		{
 			"navigationBarTitleText": "心率统计图",
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": true
 		}
 		
 	}
@@ -601,7 +601,7 @@
 		"style" :                                                                                    
 		{
 			"navigationBarTitleText": "血氧统计图",
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": true
 		}
 		
 	}
@@ -610,7 +610,7 @@
 		"style" :                                                                                    
 		{
 			"navigationBarTitleText": "睡眠统计图",
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": true
 		}
 		
 	}

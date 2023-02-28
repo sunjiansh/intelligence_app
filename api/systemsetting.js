@@ -177,3 +177,51 @@ export function deleteFriendById(ids) {
 	  login: true
   })
 }
+
+
+
+//=========================健康数据统计=======================
+
+
+
+export function getSleepDataByDay(dateObj,uid) {
+  return request.get('/health/getSleepDataByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
+
+
+export function getHealthArticleTop5() {
+  return request.get('/health/getHealthArticleTop5',{
+	  login: true
+  })
+}
+
+export function getBloodPreasureByDay(dateObj,uid) {
+  return request.get('/health/getBloodPreasureByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
+
+
+
+export function getHeartRateByDay(dateObj,uid) {
+  return request.get('/health/getHeartRateByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
+
+
+export function getOxygenByDay(dateObj,uid) {
+  return request.get('/health/getOxygenByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
