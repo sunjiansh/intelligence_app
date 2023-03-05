@@ -2,11 +2,14 @@
 // export const VUE_APP_API_URL = 'https://wxapi.yixiang.co/api'
 // export const VUE_APP_API_URL = '/h5api'
 //export const VUE_APP_API_URL = 'http://127.0.0.1:8008/api';
-export const VUE_APP_API_URL = 'http://192.168.5.142:8008/api';
+//export const VUE_APP_API_URL = 'http://192.168.5.142:8008/api';
+export const VUE_APP_API_URL = 'http://1207cf9b.nat123.cc/api';
 // export const VUE_APP_API_URL = 'http://192.168.31.223:8008/api'
 //  export const VUE_APP_API_URL = 'http://natapp.xinxintuan.co/api';
 // export const VUE_APP_API_URL = 'https://thapi.xinxintuan.co/api';
 //  export const VUE_APP_API_URL = 'https://h5api.xinxintuan.co/api';
 // export const VUE_APP_API_URL = 'https://h5api.xinxintuan.co/api';
 //export const VUE_APP_RESOURCES_URL = 'https://h5.yixiang.co/static';
+//export const VUE_APP_RESOURCES_URL = 'http://127.0.0.1:8888/static';
+//export const VUE_APP_RESOURCES_URL = 'http://192.168.5.142:8888/static';
 export const VUE_APP_RESOURCES_URL = 'http://192.168.5.142:8888/static';

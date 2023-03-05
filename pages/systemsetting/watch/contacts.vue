@@ -4,11 +4,13 @@
 		
 		<view class="item" v-for="(item, index) in list" >
 			<view class="address">
-				<view class="consignee">
-					<mt-field label="姓名" placeholder="请输入用户名" v-model="item.name"></mt-field>
+				<view class="uni-form-item uni-column consignee">
+					<!-- <mt-field label="姓名" placeholder="请输入用户名" v-model="item.name"></mt-field> -->
+					<input class="uni-input" name="input"  v-model="item.name" placeholder="请输入用户名" />
 				</view>
-				<view>
-					<mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="item.phone"></mt-field>
+				<view class="uni-form-item uni-column">
+					<!-- <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="item.phone"></mt-field> -->
+					<input class="uni-input" name="input" type="number" v-model="item.phone" placeholder="请输入手机号" />
 				</view>
 			</view>
 			<view class="operation acea-row row-between-wrapper">
@@ -21,13 +23,15 @@
 			</view>
 	    </view>
 		<view>
-			<mt-button type="primary" size="large" @click.native="addItem">新增联系人</mt-button>
+			<!-- <mt-button type="primary" size="large" @click.native="addItem">新增联系人</mt-button> -->
+			<tui-button height="100rpx" width="100rpx"  type="green" shape="circle" @click.native="addItem" style="font-size: 30px;">+</tui-button>
 		</view>
 	  
 	    <view style="height:100rpx;"></view>
 		<view class="footer acea-row row-between-wrapper">
-			<mt-button type="default" style="width:50%"  @click.native="goBack()" >取消</mt-button>
-			<mt-button type="primary" @click.native="configContacts" style="width:50%">保存</mt-button>
+			<!-- <mt-button type="default" style="width:50%"  @click.native="goBack()" >取消</mt-button>
+			<mt-button type="primary" @click.native="configContacts" style="width:50%">保存</mt-button> -->
+			<tui-button height="100rpx" :size="26" type="warning" shape="circle" @click.native="configContacts">保存</tui-button>
 		</view>
 	
 	</view>
@@ -39,7 +43,7 @@
 	
 	import { getUserInfo} from '@/api/user'
 	import{configContacts,getDWatchById} from "@/api/systemsetting.js"
-	import { Toast,Range } from 'mint-ui';
+	//import { Toast,Range } from 'mint-ui';
 
 	
 	export default {
@@ -70,6 +74,11 @@
 					}
 					
 				}).catch(err => {
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 			 }		
@@ -101,14 +110,20 @@
 				//alert(tempArr.join((',')))
 				this.form.whiteListStr = tempArr.join((','))
 				configContacts(this.form).then(res => {
-					Toast({message: '设置成功',iconClass: 'icon icon-success'});
+					//Toast({message: '设置成功',iconClass: 'icon icon-success'});
+					uni.showToast({
+					  title: '设置成功',
+					  icon: 'success',
+					  duration: 2000,
+					})
 					//this.$router.back()
 					setTimeout(() => this.$router.back(), 300);
 				}).catch(err => {
-					let instance = Toast(err.msg);
-					setTimeout(() => {
-					  instance.close();
-					}, 2000);
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 			},

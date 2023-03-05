@@ -44,43 +44,51 @@
 	  
 	  
 	  <view class="list acea-row row-between-wrapper">
-	    <view class="item acea-row row-center-wrapper row-column" @click.native="goPageByPath('/pages/health/boldpressurecurve')">
+	    <view class="item acea-row row-center-wrapper row-column" @click="goPageByPath('/pages/health/boldpressurecurve')">
 	      <text class="iconfont icon-erweima"></text>
 	      <view>血压</view>
 	    </view>
-	    <view class="item acea-row row-center-wrapper row-column" @click.native="goPageByPath('/pages/health/heartratecurve')">
+	    <view class="item acea-row row-center-wrapper row-column" @click="goPageByPath('/pages/health/heartratecurve')">
 	      <text class="iconfont icon-tongji"></text>
 	      <view>心率</view>
 	    </view>
-	    <view class="item acea-row row-center-wrapper row-column"  @click.native="goPageByPath('')">
+	    <view class="item acea-row row-center-wrapper row-column"  @click="goPageByPath('/pages/health/bloodsugarcurve')">
 	      <text class="iconfont icon-qiandai"></text>
 	      <view>血糖</view>
 	    </view>
-	    <view class="item acea-row row-center-wrapper row-column" @click.native="">
+		<view class="item acea-row row-center-wrapper row-column" @click="goPageByPath('/pages/health/uricacidcurve')">
+		  <text class="iconfont icon-dingdan"></text>
+		  <view>尿酸</view>
+		</view>
+		<view class="item acea-row row-center-wrapper row-column" @click="goPageByPath('/pages/health/falldowncurve')">
+		  <text class="iconfont icon-dingdan"></text>
+		  <view>跌倒</view>
+		</view>
+	    <view class="item acea-row row-center-wrapper row-column" @click="">
 	      <text class="iconfont icon-dingdan"></text>
 	      <view>血脂</view>
 	    </view>
-	    <view class="item acea-row row-center-wrapper row-column" @ @click.native="goPageByPath('/pages/health/boldoxygeon')">
+	    <view class="item acea-row row-center-wrapper row-column"  @click="goPageByPath('/pages/health/boldoxygeon')">
 	      <text class="iconfont icon-chongzhi"></text>
 	      <view>血氧</view>
 	    </view>
-		<view class="item acea-row row-center-wrapper row-column"  @click.native="goPageByPath('/pages/health/sleepcurve')">
+		<view class="item acea-row row-center-wrapper row-column"  @click="goPageByPath('/pages/health/sleepcurve')">
 		  <text class="iconfont icon-chongzhi"></text>
 		  <view>睡眠</view>
 		</view>
-		<view class="item acea-row row-center-wrapper row-column" @click.native="">
+		<view class="item acea-row row-center-wrapper row-column" @click="goPageByPath('/pages/health/pulseratecurve')">
 		  <text class="iconfont icon-chongzhi"></text>
 		  <view>脉搏</view>
 		</view>
-		<view class="item acea-row row-center-wrapper row-column"  @click.native="goPageByPath('/pages/health/temperaturecurve')">
+		<view class="item acea-row row-center-wrapper row-column"  @click="goPageByPath('/pages/health/temperaturecurve')">
 		  <text class="iconfont icon-chongzhi"></text>
 		  <view>体温</view>
 		</view>
-		<view class="item acea-row row-center-wrapper row-column" @click.native="goPageByPath('/pages/health/weightcurve')">
+		<view class="item acea-row row-center-wrapper row-column" @click="goPageByPath('/pages/health/weightcurve')">
 		  <text class="iconfont icon-chongzhi"></text>
 		  <view>体重</view>
 		</view>
-		<view class="item acea-row row-center-wrapper row-column"  @click.native="goPageByPath('/pages/health/ecgcurve')">
+		<view class="item acea-row row-center-wrapper row-column"  @click="goPageByPath('/pages/health/ecgcurve')">
 		  <text class="iconfont icon-chongzhi"></text>
 		  <view>心电图</view>
 		</view>
@@ -93,9 +101,9 @@
 	import { mapState, mapGetters } from 'vuex'
 	import { getUserInfo, wxappAuth, wxappBindingPhone, wxappGetUserInfo } from '@/api/user'
 	
-	import { Indicator } from 'mint-ui';
-	import { Range } from 'mint-ui';
-	import { DatetimePicker } from 'mint-ui';
+	//import { Indicator } from 'mint-ui';
+	//import { Range } from 'mint-ui';
+	//import { DatetimePicker } from 'mint-ui';
 	
 	export default {
 		components: {

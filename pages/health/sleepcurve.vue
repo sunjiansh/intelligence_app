@@ -6,24 +6,29 @@
 			<view class="item">
 				<view class="address">
 					<view class="consignee">
-						睡眠
+						<!-- 睡眠 -->
 						<text style="float: right;"></text>
 					</view>
 				</view>
 				<view class="operation acea-row row-between-wrapper">
 					<view class="acea-row row-middle">
-						<view>{{this.allSleepTimeStr}}</view>
+						<view style="font-size: 25px;">{{this.allSleepTimeStr}}</view>
 					</view>
 					<view class="acea-row row-middle">
-						<text style="align-items: center;flex-direction: column;display: flex;" @click.native="openDateObjPickerPicker">
+						<!-- <text style="align-items: center;flex-direction: column;display: flex;" @click.native="openDateObjPickerPicker">
 						{{this.dateStr}}
-						</text>
+						</text> -->
+						<picker mode="date" :value="dateStr" fields="day"  @change="handleConfirm">
+							<view class="uni-input">{{dateStr}}</view>
+						</picker>
 					</view>
 				</view>
 				<view class="address">
-					<view class="consignee">
-						<view>{{sleepDown}} - {{sleepUp}}</view>
-						<view id="main" class="echarts" style="height: 250px;width: 100%;"></view>
+					<view class="">
+						就寝时间<view style="font-size: 17px;">{{sleepDown}}</view>
+						起床时间<view style="font-size: 17px;">{{sleepUp}}</view>
+						<!-- <view id="main" class="echarts" style="height: 250px;width: 100%;"></view> -->
+						<view class="echarts" style="height: 270px;width: 100%;"><l-echart ref="chart" @finished="initData"></l-echart></view>
 					</view>
 				</view>
 		    </view>
@@ -41,14 +46,14 @@
 						<view></view>
 					</view>
 					<view class="acea-row row-middle">
-						<text style="align-items: center;flex-direction: column;display: flex;" @click.native="">
+						<text style="align-items: center;flex-direction: column;display: flex;" @click="openArticleList">
 						更多
 						</text>
 					</view>
 				</view>
 				
 				<view v-for="(item, index) in articleList"  class="address">
-					<view class="consignee" @click.native="openArticle(item.id)">
+					<view class="consignee" @click="openArticle(item.id)">
 						{{item.title}}
 					</view>
 				</view>
@@ -60,7 +65,7 @@
 				
 			</view>
 			
-			<template>
+			<!-- <template>
 			  <mt-datetime-picker
 				ref="dateObjPicker"
 				v-model="dateObj"
@@ -71,13 +76,13 @@
 				@confirm="handleConfirm"
 				>
 			  </mt-datetime-picker>
-			</template>
+			</template> -->
 		</view>
 </template>
 
 <script>
 	import * as echarts from 'echarts';
-	import { Toast,Range,DatetimePicker  } from 'mint-ui';
+	//import { Toast,Range,DatetimePicker  } from 'mint-ui';
 	import{getSleepDataByDay,getHealthArticleTop5} from "@/api/systemsetting.js"
 	
 	export default {
@@ -200,13 +205,6 @@
 					right: '5%',
 					left: '15%',
 				  },
-				  legend: {
-					icon: 'circle', // 图标形状
-					itemGap: 25, // 图例每项之间的间隔
-					itemWidth: 25, // 图标大小
-					itemHeight: 10,
-					left: 80,
-				  },
 				  xAxis: {
 				  //  min: 0,
 				    //scale: true,
@@ -252,14 +250,19 @@
 				    }
 				  ]
 				};
-				this.myChart.setOption(this.option);
+				this.$refs.chart.init(echarts, chart => {
+				    chart.setOption(this.option);
+				});
+				//this.myChart.setOption(this.option);
 			},
 			openDateObjPickerPicker(){
-				this.$refs.dateObjPicker.open();
+				//this.$refs.dateObjPicker.open();
 			},
-			handleConfirm(){
-				this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
-				//this.initData();
+			handleConfirm(e){
+				this.dateStr = e.detail.value
+				this.dateObj = new Date(e.detail.value)
+				//this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
+				this.initData();
 			},
 			dateFormat(fmt, date) {
 				let ret;
@@ -281,29 +284,32 @@
 				return fmt;
 			},
 			initData(){
-				this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
 				getSleepDataByDay(this.dateObj,this.uid).then(res => {
-					//console.error(res.data);
+					//console.error(res.data == null);
 					//alert(res.data.sleepLine);
-					this.sleepDown = res.data.sleepDownTime
-					this.sleepUp = res.data.sleepUpTime
-					
-					if(res.data==null){
+					if(res.data == null){
+						uni.showToast({
+						  title: '无数据',
+						  icon: 'none',
+						  duration: 2000,
+						})
 						this.renderData("");
-						this.allSleepTimeStr = this.getDateTime(0)
-						let instance = Toast("无数据");
-						setTimeout(() => {
-						  instance.close();
-						}, 2000);
+						this.sleepDown = ""
+						this.sleepUp = ""
+						this.allSleepTimeStr = ""
 						return;
 					}
 					this.renderData(res.data.sleepLine);
+					this.sleepDown = res.data.sleepDownTime
+					this.sleepUp = res.data.sleepUpTime
 					this.allSleepTimeStr = this.getDateTime(res.data.allSleepTime)
+					
 				}).catch(err => {
-					let instance = Toast(err.msg);
-					setTimeout(() => {
-					  instance.close();
-					}, 2000);
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 				
@@ -312,18 +318,17 @@
 			},
 			getDateTime(time) {
 				if (time >= 60 && time <= 3600) {
-					time = parseInt(time / 60) + "分" + time % 60 + "秒";
+					//time = parseInt(time / 60) + "分" + time % 60 + "秒";
+					time = parseInt(time / 60) + "分";
 				}else {
 					if (time > 3600) {
-						time = parseInt(time / 3600) + "小时" + parseInt(((time % 3600) / 60)) + "分" + time % 60 + "秒";
+						//time = parseInt(time / 3600) + "小时" + parseInt(((time % 3600) / 60)) + "分" + time % 60 + "秒";
+						time = parseInt(time / 3600) + "小时" + parseInt(((time % 3600) / 60)) + "分";
 					}else {
-						time = time + "秒";
+						//time = time + "秒";
 					}
 				}
 				return time;
-			},
-			handleConfirm(){
-				this.initData()
 			},
 			getHealthArticleTop5(){
 				getHealthArticleTop5().then(res => {
@@ -331,10 +336,11 @@
 						this.articleList = res.data
 					}
 				}).catch(err => {
-					let instance = Toast(err.msg);
-					setTimeout(() => {
-					  instance.close();
-					}, 2000);
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 				uni.stopPullDownRefresh();
@@ -342,8 +348,13 @@
 			openArticle(id){
 				//alert(id)
 				this.$yrouter.push({
-				  path: "/pages/xxxx",
+				  path: "/pages/health/articledetail",
 				  query: { id: id }
+				});
+			},
+			openArticleList(){
+				this.$yrouter.push({
+				  path: "/pages/health/articlelist"
 				});
 			},
 			onLoad: function (options) {
@@ -362,8 +373,11 @@
 		},
 		mounted() {
 			this.uid = this.$yroute.query.id
-			let chartDom = document.getElementById('main');
-			this.myChart = echarts.init(chartDom);
+			//let chartDom = document.getElementById('main');
+			//this.myChart = echarts.init(chartDom);
+			
+			this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
+			
 			this.initData()
 			//this.renderData('9220000122009999992000002000220000011000000000000020002200111000000000000000000000000000000000000200000022222')
 			

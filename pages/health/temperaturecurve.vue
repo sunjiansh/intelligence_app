@@ -3,7 +3,7 @@
 			<view class="item">
 				<view class="address">
 					<view class="consignee">
-						体温
+						<!-- 体温 -->
 						<text style="float: right;"></text>
 					</view>
 				</view>
@@ -12,14 +12,18 @@
 						<view></view>
 					</view>
 					<view class="acea-row row-middle">
-						<text style="align-items: center;flex-direction: column;display: flex;" @click.native="openDateObjPickerPicker">
+						<!-- <text style="align-items: center;flex-direction: column;display: flex;" @click.native="openDateObjPickerPicker">
 						{{this.dateStr}}
-						</text>
+						</text> -->
+						<picker mode="date" :value="dateStr"  fields="day" @change="handleConfirm">
+							<view class="uni-input">{{dateStr}}</view>
+						</picker>
 					</view>
 				</view>
 				<view class="address">
 					<view class="consignee">
-						<view id="main" class="echarts" style="height: 250px;width: 100%;"></view>
+						<!-- <view id="main" class="echarts" style="height: 250px;width: 100%;"></view> -->
+						<view class="echarts" style="height: 250px;width: 100%;"><l-echart ref="chart" @finished="initData"></l-echart></view>
 					</view>
 				</view>
 		    </view>
@@ -37,20 +41,20 @@
 						<view></view>
 					</view>
 					<view class="acea-row row-middle">
-						<text style="align-items: center;flex-direction: column;display: flex;" @click.native="">
+						<text style="align-items: center;flex-direction: column;display: flex;" @click="openArticleList">
 						更多
 						</text>
 					</view>
 				</view>
 				
 				<view v-for="(item, index) in articleList"  class="address">
-					<view class="consignee" @click.native="openArticle(item.id)">
+					<view class="consignee" @click="openArticle(item.id)">
 						{{item.title}}
 					</view>
 				</view>
 			</view>
 			
-			<template>
+			<!-- <template>
 			  <mt-datetime-picker
 				ref="dateObjPicker"
 				v-model="dateObj"
@@ -61,13 +65,13 @@
 				@confirm="handleConfirm"
 				>
 			  </mt-datetime-picker>
-			</template>
+			</template> -->
 		</view>
 </template>
 
 <script>
 	import * as echarts from 'echarts';
-	import { Toast,Range,DatetimePicker  } from 'mint-ui';
+	//import { Toast,Range,DatetimePicker  } from 'mint-ui';
 	import{getTemperatureByDay,getHealthArticleTop5} from "@/api/systemsetting.js"
 	
 	export default {
@@ -159,14 +163,19 @@
 						}
 					  }
 					};
-				this.myChart.setOption(this.option);
+				this.$refs.chart.init(echarts, chart => {
+					chart.setOption(this.option);
+				});
+				//this.myChart.setOption(this.option);
 			},
 			openDateObjPickerPicker(){
-				this.$refs.dateObjPicker.open();
+				//this.$refs.dateObjPicker.open();
 			},
-			handleConfirm(){
-				this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
-				//this.initData();
+			handleConfirm(e){
+				this.dateStr = e.detail.value
+				this.dateObj = new Date(e.detail.value)
+				//this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
+				this.initData();
 			},
 			dateFormat(fmt, date) {
 				let ret;
@@ -188,30 +197,28 @@
 				return fmt;
 			},
 			initData(){
-				this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
 				getTemperatureByDay(this.dateObj,this.uid).then(res => {
-					if(res.data==null){
-						this.renderData(null);
-						let instance = Toast("无数据");
-						setTimeout(() => {
-						  instance.close();
-						}, 2000);
+					if(res.data==null || res.data.length==0){
+						uni.showToast({
+						  title: '无数据',
+						  icon: 'none',
+						  duration: 2000,
+						})
+						this.renderData([]);
 						return;
 					}
 					this.renderData(res.data);
 				}).catch(err => {
-					let instance = Toast(err.msg);
-					setTimeout(() => {
-					  instance.close();
-					}, 2000);
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 				
 				uni.stopPullDownRefresh();
 				
-			},
-			handleConfirm(){
-				this.initData()
 			},
 			getHealthArticleTop5(){
 				getHealthArticleTop5().then(res => {
@@ -219,10 +226,11 @@
 						this.articleList = res.data
 					}
 				}).catch(err => {
-					let instance = Toast(err.msg);
-					setTimeout(() => {
-					  instance.close();
-					}, 2000);
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 				uni.stopPullDownRefresh();
@@ -230,8 +238,13 @@
 			openArticle(id){
 				//alert(id)
 				this.$yrouter.push({
-				  path: "/pages/xxxx",
+				  path: "/pages/health/articledetail",
 				  query: { id: id }
+				});
+			},
+			openArticleList(){
+				this.$yrouter.push({
+				  path: "/pages/health/articlelist"
 				});
 			},
 			onLoad: function (options) {
@@ -250,8 +263,11 @@
 		},
 		mounted() {
 			this.uid = this.$yroute.query.id
-			let chartDom = document.getElementById('main');
-			this.myChart = echarts.init(chartDom);
+			//let chartDom = document.getElementById('main');
+			//this.myChart = echarts.init(chartDom);
+			
+			this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
+			
 			this.initData()
 			this.getHealthArticleTop5()
 		}

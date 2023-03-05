@@ -1,7 +1,6 @@
 <template>
 	
 <view class="address-management" ref="container">
-	<mt-loadmore :top-method="loadTop"  ref="loadmore">
 	  <view class="item" v-for="(item, addressListIndex) in list" >
 	    <view class="address">
 	      <view class="consignee">
@@ -37,12 +36,12 @@
 	    </view>
 		
 	  </view>
-  </mt-loadmore>
   
     <view style="height:100rpx;"></view>
   
   <view class="footer acea-row row-between-wrapper">
-	<mt-button type="primary" size="large" @click.native="add">新增电子围栏</mt-button>
+	<!-- <mt-button type="primary" size="large" @click.native="add">新增电子围栏</mt-button> -->
+		<tui-button height="100rpx" :size="26" type="warning" shape="circle" @click.native="add">新增电子围栏</tui-button>
   </view>
 
 </view>
@@ -53,7 +52,7 @@
 	
 	import { getUserInfo} from '@/api/user'
 	import{getSGeographys,delGeography} from "@/api/systemsetting.js"
-	import { Toast,MessageBox } from 'mint-ui';
+	//import { Toast,MessageBox } from 'mint-ui';
 
 	
 	export default {
@@ -80,9 +79,14 @@
 				this.list = []
 				getSGeographys().then(res => {
 					//数据加载完成
-					this.$refs.loadmore.onTopLoaded()
+					//this.$refs.loadmore.onTopLoaded()
 					this.list = res.data
 				}).catch(err => {
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 				uni.stopPullDownRefresh();
@@ -103,14 +107,40 @@
 				});
 			},
 			del(id){
-				MessageBox.confirm('确定要删除?').then(action => {
-				  delGeography([id]).then(res => {
-					Toast({message: '删除成功',iconClass: 'icon icon-success'});
-				  	this.queryList()
-				  }).catch(err => {
-				  	console.log(err);
-				  })
+				// MessageBox.confirm('确定要删除?').then(action => {
+				//   delGeography([id]).then(res => {
+				// 	Toast({message: '删除成功',iconClass: 'icon icon-success'});
+				//   	this.queryList()
+				//   }).catch(err => {
+				//   	console.log(err);
+				//   })
+				// });
+				uni.showModal({
+				  title: "确定要删除?",
+				  //content: "注意:请务必核对核销码的与客户正确性",
+				  success(res) {
+					if (res.confirm) {
+						delGeography([id]).then(res => {
+							uni.showToast({
+							  title: '删除成功',
+							  icon: 'success',
+							  duration: 2000,
+							})
+							this.queryList()
+						}).catch(err => {
+							uni.showToast({
+							  title: err.msg,
+							  icon: 'none',
+							  duration: 2000,
+							})
+							console.log(err);
+						})
+					}
+				  }
 				});
+				
+				
+				
 			},
 			onLoad: function (options) {
 				// setTimeout(function () {

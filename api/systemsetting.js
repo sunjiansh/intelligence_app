@@ -199,6 +199,16 @@ export function getHealthArticleTop5() {
   })
 }
 
+
+export function getHealthArticlePage(start,pageSize) {
+  return request.get('/health/getHealthArticlePage',{
+	  start:start,
+	  pageSize:pageSize,
+	  login: true
+  })
+}
+
+
 export function getBloodPreasureByDay(dateObj,uid) {
   return request.get('/health/getBloodPreasureByDay',{
 	  day:dateObj,
@@ -246,18 +256,54 @@ export function getWeightByDay(dateObj,uid) {
 }
 
 
-export function getBloodByDay(dateObj,uid) {
-  return request.get('/health/getBloodByDay',{
+export function getBloodSugarByDay(dateObj,uid) {
+  return request.get('/health/getBloodSugarByDay',{
 	  day:dateObj,
 	  uid:uid,
 	  login: true
   })
 }
 
+
+export function getPulseRateByDay(dateObj,uid) {
+  return request.get('/health/getPulseRateByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
+
+
+
 export function getEcgByDay(dateObj,uid) {
   return request.get('/health/getEcgByDay',{
 	  day:dateObj,
 	  uid:uid,
+	  login: true
+  })
+}
+
+
+export function getUricAcidByDay(dateObj,uid) {
+  return request.get('/health/getUricAcidByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
+
+export function getFallDownByDay(dateObj,uid) {
+  return request.get('/health/getFallDownByDay',{
+	  day:dateObj,
+	  uid:uid,
+	  login: true
+  })
+}
+
+
+
+export function getHealthArticle(id) {
+  return request.get('/health/getHealthArticle/'+id,{
 	  login: true
   })
 }

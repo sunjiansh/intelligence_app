@@ -619,7 +619,7 @@
 		"style" :                                                                                    
 		{
 			"navigationBarTitleText": "体温统计图",
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": true
 		}
 		
 	}
@@ -628,7 +628,7 @@
 		"style" :                                                                                    
 		{
 			"navigationBarTitleText": "体重统计图",
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": true
 		}
 		
 	}
@@ -637,15 +637,60 @@
 		"style" :                                                                                    
 		{
 			"navigationBarTitleText": "心电统计图",
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": true
 		}
 		
 	}
         ,{
-            "path" : "pages/health/bloodcurve",
+            "path" : "pages/health/bloodsugarcurve",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "血糖统计图",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/health/uricacidcurve",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "尿酸统计图",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/health/falldowncurve",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "跌倒统计图",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/health/pulseratecurve",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "脉搏统计图",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/health/articledetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "文章",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/health/articlelist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "文章列表",
                 "enablePullDownRefresh": true
             }
             

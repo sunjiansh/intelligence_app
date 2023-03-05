@@ -7,14 +7,15 @@
 					<text style="float: right;">{{form.wdstart / 60}}分钟</text>
 				</view>
 				<view>
-					<mt-range
+					<!-- <mt-range
 					  v-model="form.wdstart"
 					  :min="300"
 					  :max="6000"
 					  :step="30"
 					  :bar-height="5"
 					  >
-					</mt-range>
+					</mt-range> -->
+					<slider :value="form.wdstart" :min="300" :max="6000" step="30"  @change="setWdstart" />
 				</view>
 			</view>
 			<view class="operation acea-row row-between-wrapper">
@@ -32,14 +33,15 @@
 					<text style="float: right;">{{form.temperatureHeight/10}}℃</text>
 				</view>
 				<view>
-					<mt-range
+					<!-- <mt-range
 					  v-model="form.temperatureHeight"
 					  :min="350"
 					  :max="420"
 					  :step="1"
 					  :bar-height="5"
 					  >
-					</mt-range>
+					</mt-range> -->
+					<slider :value="form.temperatureHeight" :min="350" :max="420" step="1"  @change="setTemperatureHeight" />
 				</view>
 			</view>
 			<view class="operation acea-row row-between-wrapper">
@@ -56,14 +58,15 @@
 					<text style="float: right;">{{form.temperatureLow/10}}℃</text>
 				</view>
 				<view>
-					<mt-range
+					<!-- <mt-range
 					  v-model="form.temperatureLow"
 					  :min="350"
 					  :max="420"
 					  :step="1"
 					  :bar-height="5"
 					  >
-					</mt-range>
+					</mt-range> -->
+					<slider :value="form.temperatureLow" :min="350" :max="420" step="1"  @change="setTemperatureLow" />
 				</view>
 			</view>
 			<view class="operation acea-row row-between-wrapper">
@@ -77,8 +80,8 @@
 	    <view style="height:100rpx;"></view>
 	  
 		<view class="footer acea-row row-between-wrapper">
-			<mt-button type="default" style="width:50%"  @click.native="goBack()" >取消</mt-button>
-			<mt-button type="primary" @click.native="configTemperature" style="width:50%">保存</mt-button>
+		<!-- 	<mt-button type="default" style="width:50%"  @click.native="goBack()" >取消</mt-button> -->
+			<tui-button height="100rpx" :size="26" type="warning" shape="circle" @click.native="configTemperature">保存</tui-button>
 		</view>
 	
 	</view>
@@ -90,7 +93,7 @@
 	
 	import { getUserInfo} from '@/api/user'
 	import{configTemperature,configHr,getDWatchById} from "@/api/systemsetting.js"
-	import { Toast,Range } from 'mint-ui';
+	//import { Toast,Range } from 'mint-ui';
 
 	
 	export default {
@@ -127,25 +130,43 @@
 			configTemperature(){
 				//update
 				if(this.form.temperatureHight <= this.form.temperatureLow){
-					let instance = Toast("最高温度要大于最低温度");
-					setTimeout(() => {
-					  instance.close();
-					}, 2000);
+					uni.showToast({
+					  title:'最高温度要大于最低温度',
+					  icon: 'none',
+					  duration: 2000,
+					})
 					return;
 				}
 				
 				configTemperature(this.form).then(res => {
-					Toast({message: '设置成功',iconClass: 'icon icon-success'});
+					//Toast({message: '设置成功',iconClass: 'icon icon-success'});
 					//this.$router.back()
+					uni.showToast({
+					  title:'设置成功',
+					  icon: 'success',
+					  duration: 2000,
+					})
 					setTimeout(() => this.$router.back(), 300);
 				}).catch(err => {
-					let instance = Toast(err.msg);
-					setTimeout(() => {
-					  instance.close();
-					}, 2000);
+					uni.showToast({
+					  title:err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 			},
+			setWdstart(e){
+				this.form.wdstart = e.detail.value
+			},
+			setTemperatureHeight(e){
+				this.form.temperatureHeight = e.detail.value
+			},
+			setTemperatureLow(e){
+				this.form.temperatureLow = e.detail.value
+			},
+			
+			
 			goBack(){
 				setTimeout(() => this.$router.back(), 300);
 			}

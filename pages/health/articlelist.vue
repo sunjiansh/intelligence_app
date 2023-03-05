@@ -4,33 +4,24 @@
 	  <view class="item" v-for="(item, index) in list" >
 	    <view class="address">
 	      <view class="consignee">
-	        名称：
-	        <text class="phone">{{ item.name }}</text>
+	        <text class="">{{ item.title }}</text>
 	      </view>
-	      <view>
-	        IMEI：{{ item.imei }}
+	      <view v-html="item.content.slice(0, 50)">
+	       
 	      </view>
-		  <view>
-		    型号：{{ item.model }}
-		  </view>
 	    </view>
 		
 	    <view class="operation acea-row row-between-wrapper">
 			
 	      <view class="select-btn">
-	        <!-- <view class="checkbox-wrapper">
-	          <checkbox-group @change="">
-	            <label class="well-check">
-	              <checkbox :value="item.isDefault==1?'checked':''" :checked="item.isDefault||item.isDefault=='1' ? true : false"></checkbox>
-	              <text class="default">设为默认</text>
-	            </label>
-	          </checkbox-group>
-	        </view> -->
+	        <view class="checkbox-wrapper">
+	          {{item.createTime | dataFormat('YYYY-mm-dd HH:MM:SS')}}
+	        </view>
 	      </view>
 		  
 	      <view class="acea-row row-middle">
-	        <view @click="edit(item.id)">
-	          <text class="iconfont icon-bianji"></text>设置
+	        <view @click="openArticle(item.id)">
+	          <text class="iconfont icon-bianji"></text>详情
 	        </view>
 	       <!-- <view @click="del(item.id)">
 	          <text class="iconfont icon-shanchu"></text>删除
@@ -53,7 +44,7 @@
 <script>
 	
 	import { getUserInfo} from '@/api/user'
-	import{getDWatchs} from "@/api/systemsetting.js"
+	import{getHealthArticlePage} from "@/api/systemsetting.js"
 	//import { Toast,MessageBox } from 'mint-ui';
 
 	
@@ -61,8 +52,33 @@
 		data() {
 			return {
 				allLoaded:true,
+				start:0,
+				pageSize:10,
 				list:[]
 			}
+		},
+		filters: {
+		    dataFormat: (date,fmt) => { // date表示要过滤的数据，fmt表示传入的参数
+				let ret;
+				date  = new Date(date)
+				const opt = {
+					"Y+": date.getFullYear().toString(),        // 年
+					"m+": (date.getMonth() + 1).toString(),     // 月
+					"d+": date.getDate().toString(),            // 日
+					"H+": date.getHours().toString(),           // 时
+					"M+": date.getMinutes().toString(),         // 分
+					"S+": date.getSeconds().toString()          // 秒
+					// 有其他格式化字符需求可以继续添加，必须转化成字符串
+				};
+				for (let k in opt) {
+					ret = new RegExp("(" + k + ")").exec(fmt);
+					if (ret) {
+						fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+					};
+				};
+				return fmt;
+		    }
+			
 		},
 		mounted() {
 			this.queryList()
@@ -71,7 +87,6 @@
 			getUserInfo: function() {
 			  let that = this
 			  getUserInfo().then(res => {
-			    
 				//alert(res.data.imei)
 				//that.yphone = res.data.phone
 			    //that.phone = that.yphone.replace(reg, '$1****$2')
@@ -79,9 +94,18 @@
 			},
 			queryList(){
 				this.list = []
-				getDWatchs().then(res => {
+				getHealthArticlePage(this.start,this.pageSize).then(res => {
 					//数据加载完成
 					//this.$refs.loadmore.onTopLoaded()
+					if(res!=null){
+						for(let i=0;i<res.length;i++){
+							let data = res[i]
+							console.error(data)
+						
+						}
+					}
+					
+					
 					this.list = res.data
 				}).catch(err => {
 					uni.showToast({
@@ -97,9 +121,9 @@
 				this.queryList()
 			 // this.$refs.loadmore.queryList();
 			},
-			edit(id){
+			openArticle(id){
 				this.$yrouter.push({
-				  path: "/pages/systemsetting/watch/hartrate",
+				  path: "/pages/health/articledetail",
 				  query: { id: id }
 				});
 			},

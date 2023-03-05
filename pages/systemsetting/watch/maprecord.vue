@@ -2,13 +2,20 @@
 	
 	<view style="height: 100%;">
 		<view>
-			<tui-button height="68rpx" :size="26" type="warning" shape="" @click="openDateObjPickerPicker">选择日期</tui-button>
-			<text style="align-items: center;flex-direction: column;display: flex;">{{this.dateStr}}</text>
+			<!-- <tui-button height="68rpx" :size="26" type="warning" shape="" @click="openDateObjPickerPicker">选择日期</tui-button>
+			<text style="align-items: center;flex-direction: column;display: flex;">{{this.dateStr}}</text> -->
+			
+			<picker style="align-items: center;flex-direction: column;display: flex;" 
+			mode="date" :value="dateStr" fields="day" @change="setDateStr">
+			
+				<view class="uni-input">{{dateStr}}</view>
+			</picker>
+			
 		</view>
 		<view id="map" style="height: 100%;">
 		</view>
 		
-		<template>
+		<!-- <template>
 		  <mt-datetime-picker
 		    ref="dateObjPicker"
 		    v-model="dateObj"
@@ -19,7 +26,7 @@
 			@confirm="handleConfirm"
 			>
 		  </mt-datetime-picker>
-		</template>
+		</template> -->
 	</view>
 	
 	
@@ -31,7 +38,7 @@
 	
 	import { getUserInfo} from '@/api/user'
 	import{getMyHistoryTrace} from "@/api/systemsetting.js"
-	import { Toast,Range,DatetimePicker  } from 'mint-ui';
+	//import { Toast,Range,DatetimePicker  } from 'mint-ui';
 	import {initMap} from "@/utils/TMap"
 	
 	
@@ -42,7 +49,7 @@
 				TXMap:null,
 				tMap:null,
 				dateObj:new Date(),
-				dateStr:null,
+				dateStr:'',
 				path: [
 				  // new TMap.LatLng(39.98481500648338, 116.30571126937866),
 				  // new TMap.LatLng(39.982266575222155, 116.30596876144409),
@@ -60,7 +67,7 @@
 		},
 		methods: {
 			initLine(){
-				this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
+				//this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
 				//后台获取数据
 				getMyHistoryTrace(this.dateObj).then(res => {
 					//this.form = res.data
@@ -104,23 +111,30 @@
 						])
 						this.selfAdaptionMarker();
 					}else{
-						let instance = Toast("无轨迹数据");
-						setTimeout(() => {
-						  instance.close();
-						}, 2000);
+						uni.showToast({
+						  title: "无轨迹数据",
+						  icon: 'none',
+						  duration: 2000,
+						})
 					}
 				}).catch(err => {
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 				
 				
 			},
 			openDateObjPickerPicker(){
-				this.$refs.dateObjPicker.open();
+				//this.$refs.dateObjPicker.open();
 			},
-			handleConfirm(){
+			setDateStr(e){
+				this.dateStr = e.detail.value
+				this.dateObj = new Date(e.detail.value)
 				//this.dateStr = this.dateFormat("YYYY-mm-dd HH:MM:SS", this.dateObj)
-				this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
 				this.initLine();
 			},
 			dateFormat(fmt, date) {
@@ -229,6 +243,7 @@
 			
 		},
 		mounted() {
+			this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
 			this.init()
 		}
 	}

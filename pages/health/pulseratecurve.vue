@@ -3,7 +3,7 @@
 			<view class="item">
 				<view class="address">
 					<view class="consignee">
-						<!-- 血氧 -->
+						<!-- 尿酸 -->
 						<text style="float: right;"></text>
 					</view>
 				</view>
@@ -71,8 +71,9 @@
 
 <script>
 	import * as echarts from 'echarts';
+	
 	//import { Toast,Range,DatetimePicker  } from 'mint-ui';
-	import{getOxygenByDay,getHealthArticleTop5} from "@/api/systemsetting.js"
+	import{getPulseRateByDay,getHealthArticleTop5} from "@/api/systemsetting.js"
 	
 	export default {
 		
@@ -93,77 +94,46 @@
 			renderData(res){
 				let xArr = []
 				let yArr = []
-				let average = 0;
 				if(res!=null){
 					for(let i=0;i<res.length;i++){
 						let data = res[i]
 						xArr[i] = data.hourMinutes
-						yArr[i] = data.oxygen
-						average += data.oxygen
+						yArr[i] = data.pulseRate
 					}
 				}
-				let x = (average/res.length).toFixed(0);
-				
-				this.option =	{
-					  title: {
-						text: x+"%(平均)",
-						left: '1%'
+				this.option ={
+					  legend: {
+						  
 					  },
 					  grid: {
-						right: '10%',
+						right: '5%',
 						height:150
 					  },
 					  xAxis: {
+						type: 'category',
+						boundaryGap: false,
+						//data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 						data: xArr
 					  },
 					  yAxis: {
-						  min:70,
-						  max:100,
+						type: 'value',
+						// axisLabel: {
+						//   formatter: '{value} °C'
+						// }
 					  },
-					  visualMap: {
-						top: 0,
-						right: 10,
-						pieces: [
-						  {
-							gt: 0,
-							lte: 95,
-							color: '#93CE07'
-						  },
-						  {
-							gt: 95,
-							lte: 100,
-							color: '#FBDB0F'
-						  }
-						],
-						outOfRange: {
-						  color: '#999'
-						}
-					  },
-					  series: {
-						name: '血氧',
-						type: 'line',
-						data: yArr,
-						markLine: {
-						  silent: true,
-						  lineStyle: {
-							color: '#333'
-						  },
-						  data: [
-							  {
-								yAxis: 80
-							  },
-							  {
-								yAxis: 90
-							  },
-							{
-							  yAxis: 95
-							},
-							{
-							  yAxis: 100
+					  series: [
+						{
+						  name: '脉搏',
+						  type: 'line',
+						  //data: [10, 11, 13, 11, 12, 12, 9],
+						  data: yArr,
+						  markPoint: {
+							  data: [
+								{ type: 'max', name: '最大' },
+							  ]
 							}
-						  ]
 						}
-					  }
+					  ]
 					};
 				this.$refs.chart.init(echarts, chart => {
 					chart.setOption(this.option);
@@ -199,7 +169,8 @@
 				return fmt;
 			},
 			initData(){
-				getOxygenByDay(this.dateObj,this.uid).then(res => {
+				//this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
+				getPulseRateByDay(this.dateObj,this.uid).then(res => {
 					if(res.data==null || res.data.length==0){
 						uni.showToast({
 						  title: '无数据',
@@ -267,9 +238,7 @@
 			this.uid = this.$yroute.query.id
 			//let chartDom = document.getElementById('main');
 			//this.myChart = echarts.init(chartDom);
-			
 			this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
-			
 			this.initData()
 			this.getHealthArticleTop5()
 		}

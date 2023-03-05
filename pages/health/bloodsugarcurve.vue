@@ -3,7 +3,7 @@
 			<view class="item">
 				<view class="address">
 					<view class="consignee">
-						<!-- 血氧 -->
+						<!-- 血压 -->
 						<text style="float: right;"></text>
 					</view>
 				</view>
@@ -23,7 +23,7 @@
 				<view class="address">
 					<view class="consignee">
 						<!-- <view id="main" class="echarts" style="height: 250px;width: 100%;"></view> -->
-						<view class="echarts" style="height: 250px;width: 100%;"><l-echart ref="chart" @finished="initData"></l-echart></view>
+						<view class="echarts" style="height: 350px;width: 100%;"><l-echart ref="chart" @finished="initData"></l-echart></view>
 					</view>
 				</view>
 		    </view>
@@ -71,8 +71,9 @@
 
 <script>
 	import * as echarts from 'echarts';
+	
 	//import { Toast,Range,DatetimePicker  } from 'mint-ui';
-	import{getOxygenByDay,getHealthArticleTop5} from "@/api/systemsetting.js"
+	import{getBloodSugarByDay,getHealthArticleTop5} from "@/api/systemsetting.js"
 	
 	export default {
 		
@@ -92,79 +93,105 @@
 			},
 			renderData(res){
 				let xArr = []
-				let yArr = []
-				let average = 0;
+				let bloodSugarArr = []
+				let bloodOxygenSaturationArr = []
+				let hemoglobinConcentrationArr = []
+				let bloodFlowVelocityArr = []
 				if(res!=null){
 					for(let i=0;i<res.length;i++){
 						let data = res[i]
 						xArr[i] = data.hourMinutes
-						yArr[i] = data.oxygen
-						average += data.oxygen
+						bloodSugarArr[i] = data.bloodSugar
+						bloodOxygenSaturationArr[i] = data.bloodOxygenSaturation
+						hemoglobinConcentrationArr[i] = data.hemoglobinConcentration
+						bloodFlowVelocityArr[i] = data.bloodFlowVelocity
 					}
 				}
-				let x = (average/res.length).toFixed(0);
-				
-				this.option =	{
-					  title: {
-						text: x+"%(平均)",
-						left: '1%'
+				let labelOption = {
+				  show: true,
+				  align: 'left',
+				   rotate: 90,
+				  //formatter: '{c}  {name|{a}}',
+				  fontSize: 16,
+				  rich: {
+				    name: {}
+				  }
+				}
+				this.option = {
+				 //  tooltip: {
+					// trigger: 'axis',
+					// axisPointer: {
+					//   type: 'shadow'
+					// }
+				 //  },
+				  legend: {
+					data: ['血糖(mmol/l)', '血氧饱和度(%)', '血红蛋白浓度(g/L)', '血流速度(ml/min)']
+				  },
+				 //  toolbox: {
+					// show: true,
+					// orient: 'vertical',
+					// left: 'right',
+					// top: 'center',
+					// feature: {
+					//   mark: { show: true },
+					//   dataView: { show: true, readOnly: false },
+					//   magicType: { show: true, type: ['line', 'bar', 'stack'] },
+					//   restore: { show: true },
+					//   saveAsImage: { show: true }
+					// }
+				 //  },
+				  xAxis: [
+					{
+					  type: 'category',
+					  axisTick: { show: false },
+					  data: xArr
+					}
+				  ],
+				  yAxis: [
+					{
+					  type: 'value'
+					}
+				  ],
+				  series: [
+					{
+					  name: '血糖(mmol/l)',
+					  type: 'bar',
+					  barGap: 0,
+					  label: labelOption,
+					  emphasis: {
+						focus: 'series'
 					  },
-					  grid: {
-						right: '10%',
-						height:150
+					  data: bloodSugarArr
+					},
+					{
+					  name: '血氧饱和度(%)',
+					  type: 'bar',
+					  label: labelOption,
+					  emphasis: {
+						focus: 'series'
 					  },
-					  xAxis: {
-						data: xArr
+					  data: bloodOxygenSaturationArr
+					},
+					{
+					  name: '血红蛋白浓度(g/L)',
+					  type: 'bar',
+					  label: labelOption,
+					  emphasis: {
+						focus: 'series'
 					  },
-					  yAxis: {
-						  min:70,
-						  max:100,
+					  data: hemoglobinConcentrationArr
+					},
+					{
+					  name: '血流速度(ml/min)',
+					  type: 'bar',
+					  label: labelOption,
+					  emphasis: {
+						focus: 'series'
 					  },
-					  visualMap: {
-						top: 0,
-						right: 10,
-						pieces: [
-						  {
-							gt: 0,
-							lte: 95,
-							color: '#93CE07'
-						  },
-						  {
-							gt: 95,
-							lte: 100,
-							color: '#FBDB0F'
-						  }
-						],
-						outOfRange: {
-						  color: '#999'
-						}
-					  },
-					  series: {
-						name: '血氧',
-						type: 'line',
-						data: yArr,
-						markLine: {
-						  silent: true,
-						  lineStyle: {
-							color: '#333'
-						  },
-						  data: [
-							  {
-								yAxis: 80
-							  },
-							  {
-								yAxis: 90
-							  },
-							{
-							  yAxis: 95
-							},
-							{
-							  yAxis: 100
-							}
-						  ]
-						}
-					  }
-					};
+					  data: bloodFlowVelocityArr
+					}
+				  ]
+				};
 				this.$refs.chart.init(echarts, chart => {
 					chart.setOption(this.option);
 				});
@@ -199,7 +226,8 @@
 				return fmt;
 			},
 			initData(){
-				getOxygenByDay(this.dateObj,this.uid).then(res => {
+				//this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
+				getBloodSugarByDay(this.dateObj,this.uid).then(res => {
 					if(res.data==null || res.data.length==0){
 						uni.showToast({
 						  title: '无数据',
@@ -267,9 +295,7 @@
 			this.uid = this.$yroute.query.id
 			//let chartDom = document.getElementById('main');
 			//this.myChart = echarts.init(chartDom);
-			
 			this.dateStr = this.dateFormat("YYYY-mm-dd", this.dateObj)
-			
 			this.initData()
 			this.getHealthArticleTop5()
 		}

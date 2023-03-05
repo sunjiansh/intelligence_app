@@ -7,14 +7,15 @@
 					<text style="float: right;">{{form.height}}厘米</text>
 				</view>
 				<view>
-					<mt-range
+					<!-- <mt-range
 					  v-model="form.height"
 					  :min="200"
 					  :max="300"
 					  :step="5"
 					  :bar-height="5"
 					  >
-					</mt-range>
+					</mt-range> -->
+					<slider :value="form.height" :min="200" :max="300" step="5"  @change="setHeight" />
 				</view>
 			</view>
 			<view class="operation acea-row row-between-wrapper">
@@ -28,8 +29,9 @@
 	    <view style="height:100rpx;"></view>
 	  
 		<view class="footer acea-row row-between-wrapper">
-			<mt-button type="default" style="width:50%"  @click.native="goBack()" >取消</mt-button>
-			<mt-button type="primary" @click.native="editDTumble" style="width:50%">保存</mt-button>
+		<!-- 	<mt-button type="default" style="width:50%"  @click.native="goBack()" >取消</mt-button>
+			<mt-button type="primary" @click.native="editDTumble" style="width:50%">保存</mt-button> -->
+			<tui-button height="100rpx" :size="26" type="warning" shape="circle" @click.native="editDTumble">保存</tui-button>
 		</view>
 	
 	</view>
@@ -39,7 +41,7 @@
 	
 	import { getUserInfo} from '@/api/user'
 	import{editDTumble,getDTumbleById} from "@/api/systemsetting.js"
-	import { Toast,Range } from 'mint-ui';
+	//import { Toast,Range } from 'mint-ui';
 
 	
 	export default {
@@ -59,6 +61,11 @@
 				 getDTumbleById(id).then(res => {
 					this.form = res.data
 				}).catch(err => {
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 			 }		
@@ -75,16 +82,25 @@
 			editDTumble(){
 				//update
 				editDTumble(this.form).then(res => {
-					Toast({message: '修改成功',iconClass: 'icon icon-success'});
+					//Toast({message: '修改成功',iconClass: 'icon icon-success'});
 					//this.$router.back()
+					uni.showToast({
+					  title: '修改成功',
+					  icon: 'success',
+					  duration: 2000,
+					})
 					setTimeout(() => this.$router.back(), 300);
 				}).catch(err => {
-					let instance = Toast(err.msg);
-					setTimeout(() => {
-					  instance.close();
-					}, 2000);
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
+			},
+			setHeight(e){
+				this.form.height = e.detail.value
 			},
 			goBack(){
 				setTimeout(() => this.$router.back(), 300);

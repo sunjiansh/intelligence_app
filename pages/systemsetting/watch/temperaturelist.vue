@@ -1,7 +1,6 @@
 <template>
 	
 <view class="address-management" ref="container">
-	<mt-loadmore :top-method="loadTop"  ref="loadmore">
 	  <view class="item" v-for="(item, index) in list" >
 	    <view class="address">
 	      <view class="consignee">
@@ -40,8 +39,6 @@
 	    </view>
 		
 	  </view>
-  </mt-loadmore>
-  
     <view style="height:100rpx;"></view>
   
  <!-- <view class="footer acea-row row-between-wrapper">
@@ -56,7 +53,7 @@
 	
 	import { getUserInfo} from '@/api/user'
 	import{getDWatchs} from "@/api/systemsetting.js"
-	import { Toast,MessageBox } from 'mint-ui';
+	//import { Toast,MessageBox } from 'mint-ui';
 
 	
 	export default {
@@ -83,9 +80,14 @@
 				this.list = []
 				getDWatchs().then(res => {
 					//数据加载完成
-					this.$refs.loadmore.onTopLoaded()
+					//this.$refs.loadmore.onTopLoaded()
 					this.list = res.data
 				}).catch(err => {
+					uni.showToast({
+					  title: err.msg,
+					  icon: 'none',
+					  duration: 2000,
+					})
 					console.log(err);
 				})
 				uni.stopPullDownRefresh();

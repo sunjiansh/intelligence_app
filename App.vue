@@ -89,5 +89,5 @@ export default {
 @import './assets/css/reset.less';
 @import './assets/css/style.less';
 //引入mint的css
-@import url("mint-ui/lib/style.css");
+//@import url("mint-ui/lib/style.css");
 </style>
