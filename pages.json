@@ -9,7 +9,8 @@
 	{
 	  "path": "pages/health/index",
 	  "style": {
-	    "navigationBarTitleText": "健康"
+	    "navigationBarTitleText": "健康",
+		"enablePullDownRefresh": true
 	  }
 	},
 	{
@@ -461,12 +462,6 @@
       }
     },
 	{
-	  "path": "pages/systemsetting/index",
-	  "style": {
-	    "navigationBarTitleText": "系统设置"
-	  }
-	},
-	{
 	  "path": "pages/systemsetting/watch/temperaturelist",
 	  "style": {
 	    "navigationBarTitleText": "体温测量设置",
@@ -579,7 +574,7 @@
 	  }
 	},
 	{
-		"path" : "pages/health/boldpressurecurve",
+		"path" : "pages/health/bloodpressurecurve",
 		"style" :                                                                                    
 		{
 			"navigationBarTitleText": "血压统计图",
@@ -597,7 +592,7 @@
 		
 	}
 	,{
-		"path" : "pages/health/boldoxygeon",
+		"path" : "pages/health/bloodoxygeoncurve",
 		"style" :                                                                                    
 		{
 			"navigationBarTitleText": "血氧统计图",

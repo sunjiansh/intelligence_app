@@ -275,9 +275,8 @@ export function getPulseRateByDay(dateObj,uid) {
 
 
 
-export function getEcgByDay(dateObj,uid) {
-  return request.get('/health/getEcgByDay',{
-	  day:dateObj,
+export function getEcgDataRecords(uid) {
+  return request.get('/health/getEcgDataRecords',{
 	  uid:uid,
 	  login: true
   })
@@ -304,6 +303,19 @@ export function getFallDownByDay(dateObj,uid) {
 
 export function getHealthArticle(id) {
   return request.get('/health/getHealthArticle/'+id,{
+	  login: true
+  })
+}
+
+
+export function getRiskStateById(uid) {
+  return request.get('/health/getRiskStateById/'+uid,{
+	  login: true
+  })
+}
+
+export function getAllHealthRecordData(uid) {
+  return request.get('/health/getAllHealthRecordData/'+uid,{
 	  login: true
   })
 }

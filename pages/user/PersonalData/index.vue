@@ -11,7 +11,7 @@
 					  <image :src="`${$VUE_APP_RESOURCES_URL}/images/alter.png`" class="alter" />
 					</view>
 					<view class="text">
-					  <view class="name line1">{{ userInfo.nickname }}</view>
+					  <view class="name line1">{{ userInfo.realName }}</view>
 					  <view class="phone">
 						绑定手机号：
 						<text v-if="userInfo.phone">{{ userInfo.phone }}</text>
@@ -24,7 +24,7 @@
 	</view>
 	<view class="list">
 		<view class="item acea-row row-between-wrapper">
-			<view>昵称</view>
+			<view>姓名</view>
 			<view class="input">
 			  <input type="text" v-model="userInfo.nickname" />
 			</view>

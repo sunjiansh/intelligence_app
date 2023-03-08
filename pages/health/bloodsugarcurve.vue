@@ -1,10 +1,9 @@
 <template>
 		<view class="address-management">
 			<view class="item">
-				<view class="address">
-					<view class="consignee">
-						<!-- 血压 -->
-						<text style="float: right;"></text>
+				<view class="cu-bar bg-white solid-bottom">
+					<view class="action">
+						<text class="cuIcon-titles text-purple"></text> 血糖
 					</view>
 				</view>
 				<view class="operation acea-row row-between-wrapper">
@@ -25,28 +24,35 @@
 						<!-- <view id="main" class="echarts" style="height: 250px;width: 100%;"></view> -->
 						<view class="echarts" style="height: 350px;width: 100%;"><l-echart ref="chart" @finished="initData"></l-echart></view>
 					</view>
+					<!-- <view>
+						<view class="grid col-5 padding-sm">
+							<view class="margin-tb-sm text-center">
+								<button class="cu-btn round bg-red" >血糖</button>
+							</view>
+							<view class="margin-tb-sm text-center">
+								<button class="cu-btn round bg-red" >饱和</button>
+							</view>
+							<view class="margin-tb-sm text-center">
+								<button class="cu-btn round bg-red" >蛋白</button>
+							</view>
+							<view class="margin-tb-sm text-center">
+								<button class="cu-btn round bg-red" >流速</button>
+							</view>
+						</view>
+					</view> -->
 				</view>
 		    </view>
 			
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					<text class="cuIcon-titles text-orange"></text> 养生百科
+				</view>
+				<view class="action" @click="openArticleList">
+					更多
+				</view>
+			</view>
 			
 			<view class="item">
-				<view class="address">
-					<view class="consignee">
-						养生百科
-						<text style="float: right;"></text>
-					</view>
-				</view>
-				<view class="operation acea-row row-between-wrapper">
-					<view class="acea-row row-middle">
-						<view></view>
-					</view>
-					<view class="acea-row row-middle">
-						<text style="align-items: center;flex-direction: column;display: flex;" @click="openArticleList">
-						更多
-						</text>
-					</view>
-				</view>
-				
 				<view v-for="(item, index) in articleList"  class="address">
 					<view class="consignee" @click="openArticle(item.id)">
 						{{item.title}}
@@ -125,7 +131,7 @@
 					// }
 				 //  },
 				  legend: {
-					data: ['血糖(mmol/l)', '血氧饱和度(%)', '血红蛋白浓度(g/L)', '血流速度(ml/min)']
+					data: ['血糖(mmol/L)', '血氧饱和度(%)', '血红蛋白浓度(g/L)', '血流速度(ml/min)']
 				  },
 				 //  toolbox: {
 					// show: true,
@@ -154,7 +160,7 @@
 				  ],
 				  series: [
 					{
-					  name: '血糖(mmol/l)',
+					  name: '血糖(mmol/L)',
 					  type: 'bar',
 					  barGap: 0,
 					  label: labelOption,
@@ -307,4 +313,7 @@
 	  background-color: #fff;
 	  height: 100vh;
 	}
+	
+	@import '/components/colorui/icon.css';
+	@import '/components/colorui/main.css';
 </style>

@@ -54,7 +54,7 @@
 		<view class="item">
 			<view class="address">
 				<view class="consignee">
-				高低预警值：
+				低温预警值：
 					<text style="float: right;">{{form.temperatureLow/10}}℃</text>
 				</view>
 				<view>
@@ -146,7 +146,7 @@
 					  icon: 'success',
 					  duration: 2000,
 					})
-					setTimeout(() => this.$router.back(), 300);
+					this.goBack()
 				}).catch(err => {
 					uni.showToast({
 					  title:err.msg,
@@ -168,7 +168,8 @@
 			
 			
 			goBack(){
-				setTimeout(() => this.$router.back(), 300);
+				setTimeout(() => uni.navigateBack(), 300);
+				//setTimeout(() => this.$router.back(), 300);
 			}
 		}
 	}

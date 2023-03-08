@@ -4,10 +4,9 @@
 		</view> -->
 		<view class="address-management">
 			<view class="item">
-				<view class="address">
-					<view class="consignee">
-						<!-- 睡眠 -->
-						<text style="float: right;"></text>
+				<view class="cu-bar bg-white solid-bottom">
+					<view class="action">
+						<text class="cuIcon-titles text-orange"></text> 睡眠
 					</view>
 				</view>
 				<view class="operation acea-row row-between-wrapper">
@@ -33,25 +32,16 @@
 				</view>
 		    </view>
 			
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					<text class="cuIcon-titles text-orange"></text> 养生百科
+				</view>
+				<view class="action" @click="openArticleList">
+					更多
+				</view>
+			</view>
 			
 			<view class="item">
-				<view class="address">
-					<view class="consignee">
-						养生百科
-						<text style="float: right;"></text>
-					</view>
-				</view>
-				<view class="operation acea-row row-between-wrapper">
-					<view class="acea-row row-middle">
-						<view></view>
-					</view>
-					<view class="acea-row row-middle">
-						<text style="align-items: center;flex-direction: column;display: flex;" @click="openArticleList">
-						更多
-						</text>
-					</view>
-				</view>
-				
 				<view v-for="(item, index) in articleList"  class="address">
 					<view class="consignee" @click="openArticle(item.id)">
 						{{item.title}}
@@ -105,8 +95,8 @@
 			  var categoryIndex = api.value(0);
 			  var start = api.coord([api.value(1), categoryIndex]);
 			  var end = api.coord([api.value(2), categoryIndex]);
-			  //var height = api.size([0, 1])[1] * 0.6;
-			  var height = 30
+			  var height = api.size([0, 1])[1] * 0.8;
+			  //var height = 30
 			  var rectShape = echarts.graphic.clipRectByRect(
 			    {
 			      x: start[0],
@@ -391,4 +381,7 @@
 	  background-color: #fff;
 	  height: 100vh;
 	}
+	
+	@import '/components/colorui/icon.css';
+	@import '/components/colorui/main.css';
 </style>

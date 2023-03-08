@@ -1,36 +1,28 @@
 <template>
 	
-	<view class="address-management">
+	<view>
 		
-		<view class="item">
-			<view class="address">
-				<!-- <view class="consignee">
-					<input class="uni-input" name="input" placeholder="这是一个输入框" />
-					<mt-field label="称呼" placeholder="请输入用户名" v-model="form.label"></mt-field>
-					<mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="form.phone"></mt-field>
-					<mt-field label="验证码" placeholder="请输入验证码" v-model="form.captcha"></mt-field>
-				</view> -->
-				<view class="uni-form-item uni-column">
-					<view class="title">称呼</view>
-					<input class="uni-input" name="input"  v-model="form.label" placeholder="请输入称呼" />
-				</view>
-				<view class="uni-form-item uni-column">
-					<view class="title">手机号</view>
-					<input class="uni-input" name="input"  v-model="form.phone" placeholder="请输入手机号" />
-				</view>
-				<view class="uni-form-item uni-column">
-					<view class="title">验证码</view>
-					<input class="uni-input" name="input"  v-model="form.captcha" placeholder="请输入验证码" />
+			<view class="cu-form-group">
+				<view class="title">称呼</view>
+				<input placeholder="输入称呼"  v-model="form.label" name="input"></input>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">手机号码</view>
+				<input placeholder="输入对方手机号"  v-model="form.phone"  name="input"></input>
+				<view class="cu-capsule radius">
+					<view class='cu-tag bg-blue '>
+						+86
+					</view>
+					<view class="cu-tag line-blue">
+						中国大陆
+					</view>
 				</view>
 			</view>
-			<view class="operation acea-row row-between-wrapper">
-				<view>
-				</view>
-				<view class="acea-row row-middle">
-					<tui-button height="70rpx" :size="30" type="warning" shape="" @click.native="sendSMS">发送验证码</tui-button>
-				</view>
+			<view class="cu-form-group">
+				<view class="title">验证码</view>
+				<input placeholder="输入验证码" v-model="form.captcha" name="input"></input>
+				<button class='cu-btn bg-green shadow'  @click="sendSMS" >验证码</button>
 			</view>
-	    </view>
 		
 		<view>
 			<button class="mini-btn" type="default" size="mini" @click="setLabel('妈妈')">妈妈</button>
@@ -46,7 +38,6 @@
 			<button class="mini-btn" type="default" size="mini" @click="setLabel('岳父')">岳父</button>
 			<button class="mini-btn" type="default" size="mini" @click="setLabel('岳母')">岳母</button>
 		</view>	
-			
 			
 	  
 	    <view style="height:100rpx;"></view>
@@ -135,7 +126,7 @@
 					  icon: 'success',
 					  duration: 2000,
 					})
-					setTimeout(() => this.$router.back(), 300);
+					this.goBack()
 					//setTimeout(() => this.$router.push('/pages/friends/index'), 300);
 				}).catch(err => {
 					// let instance = Toast(err.msg);
@@ -196,19 +187,16 @@
 				this.form.label = label
 			},
 			goBack(){
-				setTimeout(() => this.$router.back(), 300);
+				setTimeout(() => uni.navigateBack(), 300);
+				//setTimeout(() => this.$router.back(), 300);
 			}
 		}
 	}
 </script>
 
-<style scoped lang="less">
-	.address-management.on {
-	  background-color: #fff;
-	  height: 100vh;
-	}
-	.uni-form-item .title {
-		padding: 20rpx 0;
-		font-size: 18px;
-	}
+
+<style lang="less">
+@import '/components/colorui/animation.css';
+@import '/components/colorui/icon.css';
+@import '/components/colorui/main.css';
 </style>

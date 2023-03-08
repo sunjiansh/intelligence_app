@@ -155,7 +155,7 @@
 					  icon: 'success',
 					  duration: 2000,
 					})
-					setTimeout(() => this.$router.back(), 300);
+					this.goBack()
 				}).catch(err => {
 					uni.showToast({
 					  title: err.msg,
@@ -166,7 +166,8 @@
 				})
 			},
 			goBack(){
-				setTimeout(() => this.$router.back(), 300);
+				setTimeout(() => uni.navigateBack(), 300);
+				//setTimeout(() => this.$router.back(), 300);
 			}
 		}
 	}

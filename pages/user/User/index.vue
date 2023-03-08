@@ -12,15 +12,16 @@
           </view>
           <view class="text">
             <view class="acea-row row-middle">
-              <view class="name line1">{{ userInfo.nickname }}</view>
+              <view class="name line1">{{ userInfo.realName }}</view>
               <view class="member acea-row row-middle" v-if="userInfo.vip">
                 <image :src="userInfo.vipIcon" />
                 <text>{{ userInfo.vipName }}</text>
               </view>
             </view>
             <view @click="goPersonalData()" class="id" v-if="userInfo.phone">
-              <text>ID：{{ userInfo.uid || 0 }}</text>
-              <text class="iconfont icon-bianji1"></text>
+				 <text class="iconfont icon-bianji1">{{userInfo.phone}}</text>
+             <!-- <text>ID：{{ userInfo.uid || 0 }}</text>
+				  <text class="iconfont icon-bianji1"></text> -->
             </view>
             <!-- #ifdef MP-WEIXIN -->
             <!-- <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" class="binding" v-else>
@@ -37,8 +38,11 @@
         </view>
         <text class="iconfont icon-shezhi" @click="goPersonalData()"></text>
       </view>
+	  
+	  
       <view class="wrapper">
-        <view class="nav acea-row row-middle">
+        
+		<!-- <view class="nav acea-row row-middle">
           <view @click="goUserAccount()" class="item">
             <text>我的余额</text>
             <text class="num">{{ userInfo.nowMoney || 0 }}</text>
@@ -55,8 +59,20 @@
             <text>优惠券</text>
             <text class="num">{{ userInfo.couponCount || 0 }}</text>
           </view>
-        </view>
-        <view class="myOrder">
+        </view> -->
+		
+		<!--二期商城模块，暂时去掉点击事件-->
+		<view class="nav acea-row row-middle">
+		  <view class="item">
+		    <text>我的余额</text>
+		    <text class="num">0</text>
+		  </view>
+		</view>
+		
+		
+		
+		<!--二期商场模块，暂时不显示-->
+       <!-- <view class="myOrder">
           <view class="title acea-row row-between-wrapper">
             <text>我的订单</text>
             <text @click="goMyOrder()" class="allOrder">
@@ -101,7 +117,8 @@
               <text>售后/退款</text>
             </view>
           </view>
-        </view>
+        </view> -->
+		
         <view class="myService">
           <view class="serviceList acea-row row-middle">
             <template v-for="(item, MyMenusIndex) in MyMenus">
@@ -113,21 +130,14 @@
                 <text class="iconfont icon-jiantou"></text>
               </view>
             </template>
-			
-			<!-- <view class="item" @click="goPageByPath('/pages/systemsetting/index')">
-			  <view class="pictrue">
-			   
-			  </view>
-			  <view class="cell">系统设置</view>
-			  <text class="iconfont icon-jiantou"></text>
-			</view> -->
-			
           </view>
         </view>
+		
+		
       </view>
       <view class="by">
         <view>
-          <text class="by-text">www.xx.co提供技术支持</text>
+        <!-- <text class="by-text">www.xx.co提供技术支持</text> -->
         </view>
       </view>
       <!-- <SwitchWindow

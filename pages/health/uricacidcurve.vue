@@ -1,10 +1,9 @@
 <template>
 		<view class="address-management">
 			<view class="item">
-				<view class="address">
-					<view class="consignee">
-						<!-- 尿酸 -->
-						<text style="float: right;"></text>
+				<view class="cu-bar bg-white solid-bottom">
+					<view class="action">
+						<text class="cuIcon-titles text-mauve"></text> 尿酸
 					</view>
 				</view>
 				<view class="operation acea-row row-between-wrapper">
@@ -28,25 +27,16 @@
 				</view>
 		    </view>
 			
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					<text class="cuIcon-titles text-orange"></text> 养生百科
+				</view>
+				<view class="action" @click="openArticleList">
+					更多
+				</view>
+			</view>
 			
 			<view class="item">
-				<view class="address">
-					<view class="consignee">
-						养生百科
-						<text style="float: right;"></text>
-					</view>
-				</view>
-				<view class="operation acea-row row-between-wrapper">
-					<view class="acea-row row-middle">
-						<view></view>
-					</view>
-					<view class="acea-row row-middle">
-						<text style="align-items: center;flex-direction: column;display: flex;" @click="openArticleList">
-						更多
-						</text>
-					</view>
-				</view>
-				
 				<view v-for="(item, index) in articleList"  class="address">
 					<view class="consignee" @click="openArticle(item.id)">
 						{{item.title}}
@@ -250,4 +240,7 @@
 	  background-color: #fff;
 	  height: 100vh;
 	}
+	
+	@import '/components/colorui/icon.css';
+	@import '/components/colorui/main.css';
 </style>
