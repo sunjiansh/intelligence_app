@@ -14,9 +14,18 @@
 						<!-- <text style="align-items: center;flex-direction: column;display: flex;" @click.native="openDateObjPickerPicker">
 						{{this.dateStr}}
 						</text> -->
-						<picker mode="date" :value="dateStr" fields="day"  @change="handleConfirm">
+						<!-- <picker mode="date" :value="dateStr" fields="day"  @change="handleConfirm">
 							<view class="uni-input">{{dateStr}}</view>
-						</picker>
+						</picker> -->
+						
+						<view class="cu-list menu sm-border">
+						    <view class="cu-item arrow" @click="">
+								<picker mode="date" :value="dateStr" fields="day"  @change="handleConfirm">
+									<view class="uni-input">{{dateStr}}</view>
+								</picker>
+							</view>
+						</view>
+						
 					</view>
 				</view>
 				<view class="address">

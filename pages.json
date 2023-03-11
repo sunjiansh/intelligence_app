@@ -690,6 +690,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/health/friendhealth",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "好友健康",
+                "enablePullDownRefresh": true
+            }
+            
+        }
     ],
   "easycom": {
     "autoscan": true,
@@ -716,20 +725,20 @@
     "list": [
       {
         "pagePath": "pages/health/index",
-        "iconPath": "static/icon-home.png",
-        "selectedIconPath": "static/icon-home-hot.png",
+        "iconPath": "static/icon-health.png",
+        "selectedIconPath": "static/icon-health-hot.png",
         "text": "健康"
       },
 	  {
 	    "pagePath": "pages/friends/index",
-	    "iconPath": "static/icon-home.png",
-	    "selectedIconPath": "static/icon-home-hot.png",
+	    "iconPath": "static/icon-friends.png",
+	    "selectedIconPath": "static/icon-friends-hot.png",
 	    "text": "好友"
 	  },
 	  {
 	    "pagePath": "pages/device/index",
-	    "iconPath": "static/icon-home.png",
-	    "selectedIconPath": "static/icon-home-hot.png",
+	    "iconPath": "static/icon-device.png",
+	    "selectedIconPath": "static/icon-device-hot.png",
 	    "text": "设备"
 	  },
 	  // {

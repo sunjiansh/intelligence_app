@@ -39,7 +39,7 @@
 				   <input class="uni-input" name="input"  v-model="searchAddress" placeholder="请输入地址关键字" />
 			</view>
 			<view class="cu-form-group">
-				   <tui-button height="100rpx" :size="26" type="primary" shape="" @click.native="search">根据搜索地址</tui-button>
+				   <tui-button height="100rpx" :size="26" type="primary" shape="" @click.native="search">根据城市名称搜索地址</tui-button>
 			</view>
 		<!-- <view id="map" style="height: 400px;">
 		

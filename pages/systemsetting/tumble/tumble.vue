@@ -1,5 +1,24 @@
 <template>
 	<view class="address-management">
+		
+		<view class="item">
+			<view class="address">
+				<view class="consignee">
+				跌倒时长：
+					<text style="float: right;">{{form.fallDownTime}}秒</text>
+				</view>
+				<view>
+					<slider :value="form.fallDownTime" :min="5" :max="180" step="5"  @change="setFallDownTime" />
+				</view>
+			</view>
+			<view class="operation acea-row row-between-wrapper">
+				<view class="acea-row row-middle">
+					可设置范围：5-180 秒
+				</view>
+			</view>
+		</view>
+		
+		
 		<view class="item">
 			<view class="address">
 				<view class="consignee">
@@ -7,14 +26,6 @@
 					<text style="float: right;">{{form.height}}厘米</text>
 				</view>
 				<view>
-					<!-- <mt-range
-					  v-model="form.height"
-					  :min="200"
-					  :max="300"
-					  :step="5"
-					  :bar-height="5"
-					  >
-					</mt-range> -->
 					<slider :value="form.height" :min="200" :max="300" step="5"  @change="setHeight" />
 				</view>
 			</view>
@@ -48,10 +59,12 @@
 		data() {
 			return {
 				h:100,
+				f:5,
 				form:{
 					id:null,
 					imei:null,
-					height:null
+					height:null,
+					fallDownTime:null
 				}
 			}
 		},
@@ -101,6 +114,9 @@
 			},
 			setHeight(e){
 				this.form.height = e.detail.value
+			},
+			setFallDownTime(e){
+				this.form.fallDownTime = e.detail.value
 			},
 			goBack(){
 				setTimeout(() => uni.navigateBack(), 300);

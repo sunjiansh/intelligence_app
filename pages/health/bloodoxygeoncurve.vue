@@ -1,11 +1,9 @@
 <template>
 		<view class="address-management">
 			<view class="item">
-				<view class="address">
-					<view class="cu-bar bg-white solid-bottom">
-						<view class="action">
-							<text class="cuIcon-titles text-red"></text> 血氧
-						</view>
+				<view class="cu-bar bg-white solid-bottom">
+					<view class="action">
+						<text class="cuIcon-titles text-red"></text> 血氧
 					</view>
 				</view>
 				<view class="operation acea-row row-between-wrapper">
@@ -16,9 +14,18 @@
 						<!-- <text style="align-items: center;flex-direction: column;display: flex;" @click.native="openDateObjPickerPicker">
 						{{this.dateStr}}
 						</text> -->
-						<picker mode="date" :value="dateStr" fields="day"  @change="handleConfirm">
+						<!-- <picker mode="date" :value="dateStr" fields="day"  @change="handleConfirm">
 							<view class="uni-input">{{dateStr}}</view>
-						</picker>
+						</picker> -->
+						
+						<view class="cu-list menu sm-border">
+						    <view class="cu-item arrow" @click="">
+								<picker mode="date" :value="dateStr" fields="day"  @change="handleConfirm">
+									<view class="uni-input">{{dateStr}}</view>
+								</picker>
+							</view>
+						</view>
+						
 					</view>
 				</view>
 				<view class="address">

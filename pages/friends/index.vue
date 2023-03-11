@@ -39,6 +39,7 @@
 						<view class="cu-tag round bg-grey sm">5</view> -->
 					</view>
 					<view class="move">
+						<view class="bg-orange" @click="viewHealth(item.uid)">健康</view>
 						<view class="bg-green" @click="call(item.phone)">拨打</view>
 						<view class="bg-red" @click="delItem(item.id)">删除</view>
 					</view>
@@ -147,6 +148,12 @@
 			},
 			loadTop() {
 				this.queryList()
+			},
+			viewHealth(uid){
+				this.$yrouter.push({
+				  path: '/pages/health/friendhealth',
+				  query:{id:uid}
+				})
 			},
 			goBack(){
 				setTimeout(() => uni.navigateBack(), 300);

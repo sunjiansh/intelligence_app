@@ -26,7 +26,7 @@
 		<view class="item acea-row row-between-wrapper">
 			<view>姓名</view>
 			<view class="input">
-			  <input type="text" v-model="userInfo.nickname" />
+			  <input type="text" v-model="userInfo.realName" />
 			</view>
 		</view>
 		<view class="item acea-row row-between-wrapper">

@@ -124,6 +124,16 @@ export function getUserInfo() {
 }
 
 /*
+ * 根据ID获取用户信息
+ * */
+export function getUserInfoById(id) {
+  return request.get('/userInfoById/'+id, {
+    login: true,
+  })
+}
+
+
+/*
  * 小程序登陆
  * */
 export function wxappAuth(data) {
